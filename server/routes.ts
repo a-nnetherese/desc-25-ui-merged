@@ -6,7 +6,30 @@ import {
   insertBasketItemSchema,
   insertGroceryItemSchema,
   insertInventoryItemSchema,
+  type GroceryCategory,
 } from "@shared/schema";
+
+function categorizeIngredient(name: string): GroceryCategory {
+  const lowerName = name.toLowerCase();
+  
+  if (lowerName.includes("chicken") || lowerName.includes("pork") || lowerName.includes("beef") || lowerName.includes("sausage") || lowerName.includes("hotdog") || lowerName.includes("tocino") || lowerName.includes("longganisa") || lowerName.includes("tapa")) {
+    return "Meat";
+  } else if (lowerName.includes("fish") || lowerName.includes("sardines") || lowerName.includes("tuna") || lowerName.includes("salmon")) {
+    return "Seafood";
+  } else if (lowerName.includes("milk") || lowerName.includes("cheese") || lowerName.includes("egg") || lowerName.includes("butter") || lowerName.includes("cream") || lowerName.includes("yogurt")) {
+    return "Dairy";
+  } else if (lowerName.includes("rice") || lowerName.includes("bread") || lowerName.includes("flour") || lowerName.includes("oat") || lowerName.includes("pasta") || lowerName.includes("noodle")) {
+    return "Grain";
+  } else if (lowerName.includes("banana") || lowerName.includes("apple") || lowerName.includes("orange") || lowerName.includes("lemon") || lowerName.includes("mango")) {
+    return "Fruit";
+  } else if (lowerName.includes("beans") || lowerName.includes("vegetable") || lowerName.includes("pechay") || lowerName.includes("spinach") || lowerName.includes("eggplant") || lowerName.includes("tomato") || lowerName.includes("onion") || lowerName.includes("garlic") || lowerName.includes("pepper") || lowerName.includes("carrot") || lowerName.includes("potato") || lowerName.includes("lettuce") || lowerName.includes("papaya")) {
+    return "Vegetable";
+  } else if (lowerName.includes("sauce") || lowerName.includes("oil") || lowerName.includes("vinegar") || lowerName.includes("soy") || lowerName.includes("ketchup") || lowerName.includes("sugar") || lowerName.includes("salt")) {
+    return "Processed";
+  }
+  
+  return "Processed";
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Recipes
@@ -128,8 +151,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Create grocery items
       for (const [name, { quantity, unit }] of consolidatedIngredients) {
+        const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
         await storage.createGroceryItem({
-          name: name.charAt(0).toUpperCase() + name.slice(1),
+          name: capitalizedName,
+          category: categorizeIngredient(capitalizedName),
           quantity: unit ? `${quantity} ${unit}` : (quantity || "1"),
           checked: 0,
         });

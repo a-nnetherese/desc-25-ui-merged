@@ -21,15 +21,15 @@ export default function Home() {
   const [scannerOpen, setScannerOpen] = useState(false);
 
   const { data: items = [], isLoading } = useQuery<GroceryItem[]>({
-    queryKey: ["/api/grocery-items"],
+    queryKey: ["/api/grocery-list"],
   });
 
   const addItemMutation = useMutation({
-    mutationFn: async (data: { name: string; category: GroceryCategory; quantity: number }) => {
-      return await apiRequest("POST", "/api/grocery-items", data);
+    mutationFn: async (data: { name: string; category: GroceryCategory; quantity: string }) => {
+      return await apiRequest("POST", "/api/grocery-list", data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/grocery-items"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/grocery-list"] });
       toast({
         title: "Item Added",
         description: "Your grocery item has been added to the list.",
@@ -37,21 +37,21 @@ export default function Home() {
     },
   });
 
-  const removeItemMutation = useMutation({
+  const toggleItemMutation = useMutation({
     mutationFn: async (id: string) => {
-      return await apiRequest("DELETE", `/api/grocery-items/${id}`, {});
+      return await apiRequest("PATCH", `/api/grocery-list/${id}/toggle`, {});
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/grocery-items"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/grocery-list"] });
     },
   });
 
   const handleAddItem = (name: string, category: GroceryCategory, quantity: number) => {
-    addItemMutation.mutate({ name, category, quantity });
+    addItemMutation.mutate({ name, category, quantity: quantity.toString() });
   };
 
   const handleToggleItem = (id: string) => {
-    removeItemMutation.mutate(id);
+    toggleItemMutation.mutate(id);
   };
 
   const handleQRScan = (data: string) => {

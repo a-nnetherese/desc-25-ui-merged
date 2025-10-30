@@ -13,6 +13,7 @@ export const recipes = pgTable("recipes", {
   servings: integer("servings").notNull(),
   imageUrl: text("image_url").notNull(),
   ingredients: text("ingredients").array().notNull(),
+  instructions: text("instructions").array().notNull(),
 });
 
 export const basketItems = pgTable("basket_items", {
@@ -74,14 +75,16 @@ export const groceryItems = pgTable("grocery_items", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   category: text("category").notNull(),
-  quantity: integer("quantity").notNull().default(1),
+  quantity: text("quantity").notNull(),
+  checked: integer("checked").notNull().default(0),
 });
 
 export const insertGroceryItemSchema = createInsertSchema(groceryItems).omit({
   id: true,
 }).extend({
   category: z.enum(groceryCategories),
-  quantity: z.number().int().min(1).default(1),
+  quantity: z.string().default("1"),
+  checked: z.number().int().default(0),
 });
 
 export type InsertGroceryItem = z.infer<typeof insertGroceryItemSchema>;

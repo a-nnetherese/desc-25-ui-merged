@@ -137,6 +137,25 @@ export function RecipeModal({ recipe, isOpen, onClose }: RecipeModalProps) {
               <Separator />
 
               <div>
+                <h4 className="font-semibold mb-4 text-base">Instructions</h4>
+                <ol className="space-y-3">
+                  {recipe.instructions.map((instruction, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-sm text-muted-foreground"
+                    >
+                      <span className="font-semibold text-primary min-w-[24px]">
+                        {index + 1}.
+                      </span>
+                      <span className="flex-1">{instruction}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <Separator />
+
+              <div>
                 <h4 className="font-semibold mb-4 text-base">Servings</h4>
                 <div className="flex items-center gap-4">
                   <Button
