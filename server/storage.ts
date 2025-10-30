@@ -35,6 +35,7 @@ export interface IStorage {
   createGroceryItem(item: InsertGroceryItem): Promise<GroceryItem>;
   toggleGroceryItem(id: string): Promise<GroceryItem | undefined>;
   deleteCheckedGroceryItems(): Promise<void>;
+  deleteGroceryItem(id: string): Promise<boolean>;
   clearGroceryList(): Promise<void>;
 
   // Inventory
@@ -481,6 +482,10 @@ async createGroceryItem(insertItem: InsertGroceryItem): Promise<GroceryItem> {
     );
     this.groceryItems.clear();
     uncheckedItems.forEach((item) => this.groceryItems.set(item.id, item));
+  }
+
+  async deleteGroceryItem(id: string): Promise<boolean> {
+    return this.groceryItems.delete(id);
   }
 
   async clearGroceryList(): Promise<void> {

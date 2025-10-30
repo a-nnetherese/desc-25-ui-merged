@@ -191,6 +191,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ success: true });
   });
 
+  app.delete("/api/grocery-list/:id", async (req, res) => {
+    const id = req.params.id;
+    if (!id || id.trim() === "") {
+      return res.status(400).json({ error: "Invalid item ID" });
+    }
+    const deleted = await storage.deleteGroceryItem(id);
+    if (!deleted) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+    res.json({ success: true });
+  });
+
   // Inventory
   app.get("/api/inventory", async (_req, res) => {
     const items = await storage.getAllInventoryItems();

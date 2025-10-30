@@ -9,10 +9,11 @@ interface FullListModalProps {
   onOpenChange: (open: boolean) => void;
   items: GroceryItem[];
   onToggleItem: (id: string) => void;
+  onDeleteItem?: (id: string) => void;
   onAddNew: () => void;
 }
 
-export function FullListModal({ open, onOpenChange, items, onToggleItem, onAddNew }: FullListModalProps) {
+export function FullListModal({ open, onOpenChange, items, onToggleItem, onDeleteItem, onAddNew }: FullListModalProps) {
   const sortedItems = [...items].sort((a, b) => a.category.localeCompare(b.category));
 
   return (
@@ -46,6 +47,7 @@ export function FullListModal({ open, onOpenChange, items, onToggleItem, onAddNe
                   key={item.id}
                   item={item}
                   onToggle={onToggleItem}
+                  onDelete={onDeleteItem}
                 />
               ))}
             </div>

@@ -49,13 +49,25 @@ export default function Home() {
     if (breakfastChunks.length === 0) return;
     setBreakfastPage((p) => (p + 1) % breakfastChunks.length);
   };
+  const prevBreakfast = () => {
+    if (breakfastChunks.length === 0) return;
+    setBreakfastPage((p) => (p - 1 + breakfastChunks.length) % breakfastChunks.length);
+  };
   const nextLunch = () => {
     if (lunchChunks.length === 0) return;
     setLunchPage((p) => (p + 1) % lunchChunks.length);
   };
+  const prevLunch = () => {
+    if (lunchChunks.length === 0) return;
+    setLunchPage((p) => (p - 1 + lunchChunks.length) % lunchChunks.length);
+  };
   const nextDinner = () => {
     if (dinnerChunks.length === 0) return;
     setDinnerPage((p) => (p + 1) % dinnerChunks.length);
+  };
+  const prevDinner = () => {
+    if (dinnerChunks.length === 0) return;
+    setDinnerPage((p) => (p - 1 + dinnerChunks.length) % dinnerChunks.length);
   };
   // ========================================================================
 
@@ -183,14 +195,22 @@ export default function Home() {
       </div>
 
       {breakfastChunks.length > 1 && (
-        <button
-        onClick={nextBreakfast}
-        aria-label="Next breakfast"
-        className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
-
+        <>
+          <button
+            onClick={prevBreakfast}
+            aria-label="Previous breakfast"
+            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={nextBreakfast}
+            aria-label="Next breakfast"
+            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </>
       )}
     </div>
   )}
@@ -229,13 +249,22 @@ export default function Home() {
       </div>
 
       {lunchChunks.length > 1 && (
-         <button
-        onClick={nextLunch}
-        aria-label="Next breakfast"
-        className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
+        <>
+          <button
+            onClick={prevLunch}
+            aria-label="Previous lunch"
+            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={nextLunch}
+            aria-label="Next lunch"
+            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </>
       )}
     </div>
   )}
@@ -274,13 +303,22 @@ export default function Home() {
       </div>
 
       {dinnerChunks.length > 1 && (
-         <button
-        onClick={nextDinner} // or nextLunch / nextDinner
-        aria-label="Next breakfast"
-        className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
+        <>
+          <button
+            onClick={prevDinner}
+            aria-label="Previous dinner"
+            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={nextDinner}
+            aria-label="Next dinner"
+            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </>
       )}
     </div>
   )}

@@ -46,12 +46,29 @@ export default function Home() {
     },
   });
 
+  const deleteItemMutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await apiRequest("DELETE", `/api/grocery-list/${id}`, {});
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/grocery-list"] });
+      toast({
+        title: "Item Deleted",
+        description: "The item has been removed from your list.",
+      });
+    },
+  });
+
   const handleAddItem = (name: string, category: GroceryCategory, quantity: number) => {
     addItemMutation.mutate({ name, category, quantity: quantity.toString() });
   };
 
   const handleToggleItem = (id: string) => {
     toggleItemMutation.mutate(id);
+  };
+
+  const handleDeleteItem = (id: string) => {
+    deleteItemMutation.mutate(id);
   };
 
   const handleQRScan = (data: string) => {
@@ -196,6 +213,7 @@ export default function Home() {
                             <GroceryListItem
                               item={displayItems[index]}
                               onToggle={handleToggleItem}
+                              onDelete={handleDeleteItem}
                             />
                           </div>
                         ) : (
@@ -223,6 +241,7 @@ export default function Home() {
         onOpenChange={setFullListOpen}
         items={items}
         onToggleItem={handleToggleItem}
+        onDeleteItem={handleDeleteItem}
         onAddNew={() => {
           setFullListOpen(false);
           setManualInputOpen(true);
