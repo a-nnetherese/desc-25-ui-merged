@@ -62,7 +62,7 @@ export class MemStorage implements IStorage {
     const sampleRecipes: InsertRecipe[] = [
       // Breakfast (10 recipes)
       {
-        name: "DSMVNSJFDKAMJSNKJFNKSJFNDKSFJNDKKJFN Fried Rice + Egg + Hotdog",
+        name: "Garlic Fried Ice + Egg + Hotdog",
         category: "breakfast",
         description: "A hearty Filipino breakfast favorite combining savory fried rice with a sunnyside-up egg and sliced hotdogs. Quick, filling, and perfect for busy mornings.",
         difficulty: 2,
