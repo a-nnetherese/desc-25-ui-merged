@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Camera, Edit, ClipboardList } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GreenWaveBackground } from "@/components/GreenWaveBackground";
 import { ManualInputModal } from "@/components/ManualInputModal";
 import { FullListModal } from "@/components/FullListModal";
+import { Link } from "wouter";
 import { QRScannerModal } from "@/components/QRScannerModal";
 import { GroceryListItem } from "@/components/GroceryListItem";
 import { type GroceryItem, type GroceryCategory } from "@shared/schema";
@@ -97,20 +99,35 @@ export default function Home() {
             <p className="text-xl font-regular sm:text-2xl text-green-700 mb-8">
               Track what you need the next time you go out for groceries
             </p>
+          <div className="flex flex-col sm:flex-row gap-4">
             <Button
               data-testid="button-see-current-pantry"
               onClick={() => setFullListOpen(true)}
-              className="bg-secondary text-white px-8 text-2xl font-medium rounded-full transition duration-150 ease-in-out"
+              className="bg-secondary text-white px-8 text-1xl font-medium rounded-full transition duration-150 ease-in-out"
             >
               See Current Pantry
             </Button>
+
+            <Link href="/">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="rounded-full px-8 text-base font-medium bg-primary border-tertiary/30 hover:bg-tertiary/20 backdrop-blur-sm sm:w-auto"
+                data-testid="button-grocery-list"
+              >
+                Back to home
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+
           </div>
           <div className="flex-shrink-0 flex items-center">
-            <div className="w-48 h-48 rounded-3xl overflow-hidden flex items-center justify-center bg-gradient-to-br from-yellow-200 via-orange-100 to-pink-100 shadow-xl border-4 border-orange-200">
+            <div className="relative">
               <img
                 src={Clipboard3D}
                 alt="Checklist illustration"
-                className="w-full h-full object-contain"
+                className="h-64 w-64 opacity-100 object-contain"
                 draggable={false}
               />
             </div>
@@ -142,7 +159,7 @@ export default function Home() {
                 <Button
                   data-testid="button-scan"
                   onClick={() => setScannerOpen(true)}
-                  className="bg-pink-500 hover:bg-pink-400 shadow-xl text-white w-28 h-28 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center gap-2 text-lg font-bold p-4 border-transparent border-2 focus:ring-4 focus:ring-pink-300"
+                  className="bg-secondary shadow-xl text-white w-28 h-28 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center gap-2 text-lg font-bold p-4 border-transparent border-2 focus:ring-4 focus:ring-pink-300"
                   style={{ boxShadow: '0 8px 28px -8px #e94279aa' }}
                 >
                   <Camera className="w-10 h-10 mb-1" />
@@ -151,7 +168,7 @@ export default function Home() {
                 <Button
                   data-testid="button-self-input"
                   onClick={() => setManualInputOpen(true)}
-                  className="bg-pink-500 hover:bg-pink-400 shadow-xl text-white w-28 h-28 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center gap-2 text-lg font-bold p-4 border-transparent border-2 focus:ring-4 focus:ring-pink-300"
+                  className="bg-secondary shadow-xl text-white w-28 h-28 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center gap-2 text-lg font-bold p-4 border-transparent border-2 focus:ring-4 focus:ring-pink-300"
                   style={{ boxShadow: '0 8px 28px -8px #e94279aa' }}
                 >
                   <Edit className="w-10 h-10 mb-1" />

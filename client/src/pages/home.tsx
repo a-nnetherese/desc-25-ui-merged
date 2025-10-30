@@ -110,8 +110,8 @@ export default function Home() {
                   <Link href="/grocery-list">
                     <Button
                       size="lg"
-                      variant="outline"
-                      className="rounded-full px-8 text-base font-medium bg-tertiary/100 border-tertiary/30 hover:bg-tertiary/20 backdrop-blur-sm w-full sm:w-auto"
+                      variant="secondary"
+                      className="rounded-full px-8 text-base font-medium bg-tertiary border-tertiary/30 hover:bg-tertiary/20 backdrop-blur-sm w-full sm:w-auto"
                       data-testid="button-grocery-list"
                     >
                       See Current Grocery List
