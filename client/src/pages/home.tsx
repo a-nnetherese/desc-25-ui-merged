@@ -2,7 +2,7 @@ import { useState, useRef, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import cartImage from "/Users/theresedeang/Downloads/shopping cart.png";
+import cartImage from "@/assets/shopping cart.png";
 import { Link } from "wouter";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeModal } from "@/components/recipe-modal";
