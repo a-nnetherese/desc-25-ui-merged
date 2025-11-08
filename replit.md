@@ -65,3 +65,9 @@ Ecosina is a meal planning and grocery management application designed specifica
 - Integrated OCR photo scanning for receipts and grocery lists with proper category validation (Nov 8, 2025)
 - Removed pink hover circle from recipe cards for cleaner UI (Nov 8, 2025)
 - Updated all "See all" links to navigate to category-specific pages (Nov 8, 2025)
+- **V2/V3 Updates** (Nov 8, 2025):
+  - Replaced image URL input with photo upload feature in add-recipe-dialog (take photo or upload image)
+  - Enhanced OCR scanning accuracy with OCR Engine 2, auto-scaling, and orientation detection
+  - Improved text preprocessing for better handling of blurry photos and OCR errors
+  - Added auto-scroll to top when navigating to category pages via "See all" button
+  - Removed dark mode feature completely (removed ThemeToggle and ThemeProvider)

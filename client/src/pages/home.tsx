@@ -6,7 +6,6 @@ import cartImage from "@/assets/shopping cart.png";
 import { Link } from "wouter";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeModal } from "@/components/recipe-modal";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { AddRecipeDialog } from "@/components/add-recipe-dialog";
 import type { Recipe } from "@shared/schema";
 
@@ -100,11 +99,6 @@ export default function Home() {
   return (
     <>
       <div className="min-h-screen">
-        {/* Theme Toggle - Fixed Top Right */}
-        <div className="fixed top-4 right-4 z-50">
-          <ThemeToggle />
-        </div>
-
         {/* Hero Section */}
         <section className="relative bg-primary text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 opacity-10">

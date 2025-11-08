@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import {
   Dialog,
@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Camera, Upload, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
@@ -35,8 +35,10 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
   const [servings, setServings] = useState("");
   const [difficulty, setDifficulty] = useState("2");
   const [imageUrl, setImageUrl] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [ingredients, setIngredients] = useState<string[]>([""]);
   const [instructions, setInstructions] = useState<string[]>([""]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const { toast } = useToast();
 
@@ -93,9 +95,53 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
     setServings("");
     setDifficulty("2");
     setImageUrl("");
+    setImagePreview(null);
     setIngredients([""]);
     setInstructions([""]);
     // Don't reset category here since it should keep the defaultCategory value set by useEffect
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64String = reader.result as string;
+          setImageUrl(base64String);
+          setImagePreview(base64String);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        toast({
+          title: "Invalid file",
+          description: "Please select an image file.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
+  const handleTakePhoto = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.setAttribute("capture", "environment");
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleUploadPhoto = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.removeAttribute("capture");
+      fileInputRef.current.click();
+    }
+  };
+
+  const removeImage = () => {
+    setImageUrl("");
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const addIngredient = () => setIngredients([...ingredients, ""]);
@@ -208,13 +254,58 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="image-url" data-testid="label-image-url">Image URL (optional)</Label>
-            <Input
-              id="image-url"
-              placeholder="https://example.com/image.jpg"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              data-testid="input-image-url"
+            <Label data-testid="label-recipe-image">Recipe Image (optional)</Label>
+            {imagePreview ? (
+              <div className="space-y-2">
+                <div className="relative w-full h-48 rounded-md overflow-hidden border">
+                  <img
+                    src={imagePreview}
+                    alt="Recipe preview"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={removeImage}
+                  className="w-full"
+                  data-testid="button-remove-image"
+                >
+                  <X className="mr-2 h-4 w-4" />
+                  Remove Image
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleTakePhoto}
+                  className="w-full"
+                  data-testid="button-take-recipe-photo"
+                >
+                  <Camera className="mr-2 h-4 w-4" />
+                  Take Photo
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleUploadPhoto}
+                  className="w-full"
+                  data-testid="button-upload-recipe-photo"
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload Photo
+                </Button>
+              </div>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageUpload}
+              data-testid="input-recipe-image-file"
             />
           </div>
 

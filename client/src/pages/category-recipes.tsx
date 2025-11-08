@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { RecipeCard } from "@/components/recipe-card";
@@ -11,6 +11,11 @@ export default function CategoryRecipes() {
   const [, params] = useRoute("/category/:category");
   const category = params?.category || "breakfast";
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+
+  // Scroll to top when the page loads or category changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [category]);
 
   const { data: recipes = [], isLoading } = useQuery<Recipe[]>({
     queryKey: ["/api/recipes"],

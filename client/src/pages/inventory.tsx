@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Package, AlertCircle, Scan } from "lucide-react";
 import { Link } from "wouter";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { format, differenceInDays } from "date-fns";
 import { AddInventoryModal } from "@/components/add-inventory-modal";
 import type { InventoryItem } from "@shared/schema";
@@ -51,9 +50,6 @@ export default function Inventory() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="mb-8">
           <Link href="/">

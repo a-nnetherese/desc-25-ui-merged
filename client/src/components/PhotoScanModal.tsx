@@ -37,12 +37,20 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
     setStep("processing");
 
     try {
-      // Create FormData for OCR.space API
+      // Create FormData for OCR.space API with enhanced parameters
       const formData = new FormData();
       formData.append("file", file);
       formData.append("apikey", apiKey);
       formData.append("language", "eng");
       formData.append("isOverlayRequired", "false");
+      // OCR Engine 2 is more accurate for structured text and receipts
+      formData.append("OCREngine", "2");
+      // Enable auto-scaling for better accuracy with different image sizes
+      formData.append("scale", "true");
+      // Enable auto-rotation for tilted images
+      formData.append("isTable", "true");
+      // Detect orientation automatically
+      formData.append("detectOrientation", "true");
 
       const response = await fetch("https://api.ocr.space/parse/image", {
         method: "POST",
@@ -53,6 +61,16 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
 
       if (result.ParsedResults && result.ParsedResults[0]) {
         const extractedText = result.ParsedResults[0].ParsedText;
+        
+        // Check if OCR had issues with the image quality
+        if (result.ParsedResults[0].ErrorMessage) {
+          toast({
+            title: "Image quality issue",
+            description: "The image quality may be too low. Try a clearer, well-lit photo.",
+            variant: "destructive",
+          });
+          return;
+        }
         
         // Parse the extracted text to identify grocery items
         const items = parseGroceryItems(extractedText);
@@ -88,50 +106,68 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
   };
 
   const parseGroceryItems = (text: string): Array<{ name: string; category: string; quantity: string }> => {
-    const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    // More aggressive text cleaning for blurry/OCR errors
+    const cleanedText = text
+      .replace(/[|]/g, "I") // Common OCR mistake: | instead of I
+      .replace(/[0O]/g, (match) => match === "O" ? "0" : match) // Distinguish O and 0
+      .replace(/\s+/g, " "); // Normalize whitespace
+
+    const lines = cleanedText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const items: Array<{ name: string; category: string; quantity: string }> = [];
 
     // Valid schema categories - MUST match exactly
     const validCategories = ["Fruit", "Vegetable", "Meat", "Seafood", "Dairy", "Processed", "Grain"] as const;
 
+    // Enhanced keyword matching with more variations and common misspellings
     const categoryKeywords: Record<string, string[]> = {
-      Fruit: ["apple", "banana", "orange", "grape", "strawberry", "mango", "pineapple", "watermelon", "lemon", "lime", "peach", "pear"],
-      Vegetable: ["carrot", "tomato", "lettuce", "cucumber", "onion", "garlic", "potato", "cabbage", "spinach", "broccoli", "pepper", "celery"],
-      Meat: ["chicken", "beef", "pork", "bacon", "ham", "sausage", "steak", "turkey", "lamb"],
-      Seafood: ["fish", "salmon", "tuna", "shrimp", "crab", "lobster", "tilapia"],
-      Dairy: ["milk", "cheese", "butter", "yogurt", "cream", "egg"],
-      Grain: ["rice", "bread", "pasta", "flour", "oats", "cereal", "wheat"],
-      Processed: ["chips", "cookie", "candy", "soda", "sauce", "oil", "vinegar", "salt", "sugar", "ketchup"],
+      Fruit: ["apple", "apples", "banana", "bananas", "orange", "oranges", "grape", "grapes", "strawberry", "strawberries", "berry", "berries", "mango", "mangos", "pineapple", "watermelon", "lemon", "lemons", "lime", "limes", "peach", "peaches", "pear", "pears", "cherry", "cherries", "blueberry", "blueberries"],
+      Vegetable: ["carrot", "carrots", "tomato", "tomatoes", "lettuce", "cucumber", "cucumbers", "onion", "onions", "garlic", "potato", "potatoes", "cabbage", "spinach", "broccoli", "pepper", "peppers", "celery", "corn", "peas", "beans", "zucchini"],
+      Meat: ["chicken", "beef", "pork", "bacon", "ham", "sausage", "steak", "turkey", "lamb", "ground", "breast"],
+      Seafood: ["fish", "salmon", "tuna", "shrimp", "crab", "lobster", "tilapia", "cod", "seafood"],
+      Dairy: ["milk", "cheese", "butter", "yogurt", "cream", "egg", "eggs", "dairy"],
+      Grain: ["rice", "bread", "pasta", "flour", "oats", "cereal", "wheat", "tortilla", "bagel", "roll"],
+      Processed: ["chips", "chip", "cookie", "cookies", "candy", "soda", "pop", "sauce", "oil", "vinegar", "salt", "sugar", "ketchup", "mustard", "mayo", "mayonnaise", "dressing"],
     };
 
     for (const line of lines) {
       const lowerLine = line.toLowerCase();
       
-      // Skip lines that are likely headers, totals, or metadata
+      // Enhanced skip logic - more patterns for non-item lines
       if (
         lowerLine.includes("total") ||
+        lowerLine.includes("subtotal") ||
         lowerLine.includes("tax") ||
         lowerLine.includes("receipt") ||
         lowerLine.includes("thank") ||
+        lowerLine.includes("change") ||
+        lowerLine.includes("payment") ||
+        lowerLine.includes("card") ||
         lowerLine.match(/^\d+\/\d+\/\d+/) || // dates
+        lowerLine.match(/^\d+:\d+/) || // times
         lowerLine.match(/^\$?\d+\.?\d*$/) || // just prices
-        line.length < 3
+        lowerLine.match(/^balance/i) ||
+        line.length < 2 // Allow 2-char minimum for items like "ox" (oxtail)
       ) {
         continue;
       }
 
-      // Try to extract quantity
-      const quantityMatch = line.match(/(\d+)\s*x?\s/i);
+      // Enhanced quantity extraction - handle more formats
+      // Matches: "2x", "2 x", "x2", "qty 2", "2 bananas", etc.
+      const quantityMatch = line.match(/(?:^|\s)(\d+)\s*(?:x|qty)?(?:\s|$)/i) || 
+                           line.match(/(?:x|qty)\s*(\d+)/i);
       const quantity = quantityMatch ? quantityMatch[1] : "1";
 
-      // Clean the item name (remove prices, quantities, etc.)
+      // Enhanced item name cleaning with better pattern recognition
       let itemName = line
         .replace(/^\d+\s*x?\s*/i, "") // remove leading quantities
+        .replace(/\s*x?\d+\s*$/i, "") // remove trailing quantities
         .replace(/\$?\d+\.?\d*\s*$/g, "") // remove trailing prices
-        .replace(/[^a-zA-Z\s]/g, "") // remove special characters
+        .replace(/\$\d+\.?\d*/g, "") // remove inline prices
+        .replace(/[^a-zA-Z\s'-]/g, "") // keep letters, spaces, hyphens, apostrophes
+        .replace(/\s+/g, " ") // normalize spaces
         .trim();
 
-      if (itemName.length < 3) continue;
+      if (itemName.length < 2) continue;
 
       // Determine category based on keywords - ALWAYS use a valid category
       let category: string = "Processed"; // safe default
