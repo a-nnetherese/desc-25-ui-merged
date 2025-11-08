@@ -185,17 +185,6 @@ export class MemStorage implements IStorage {
         instructions: ["Sauté garlic in oil until golden.", "Add chicken, soy sauce, vinegar, water, and pepper.", "Simmer covered for 15–20 mins until chicken is cooked and sauce thickens.", "Serve with rice."],
       },
       {
-        name: "Chicken Adobo (Easy Version)",
-        category: "lunch",
-        description: "A simple and flavorful Filipino classic simmered in soy sauce, vinegar, and garlic.",
-        difficulty: 1,
-        prepTime: 15,
-        servings: 2,
-        imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&h=800&fit=crop",
-        ingredients: ["150g chicken (any cut)", "1 tbsp soy sauce", "1 tbsp vinegar", "2 cloves garlic, minced", "¼ cup water", "Salt, pepper, and oil"],
-        instructions: ["Sauté garlic in oil until golden.", "Add chicken, soy sauce, vinegar, water, pepper.", "Simmer covered for 15–20 mins until chicken is cooked and sauce thickens.", "Serve with rice."]
-  },
-      {
         name: "Garlic Butter Chicken + Rice",
         category: "lunch",
         description: "Tender chicken cooked in rich garlic butter sauce, perfect over rice.",
@@ -295,11 +284,78 @@ export class MemStorage implements IStorage {
         ingredients: ["100g pork, sliced thin", "1 tbsp soy sauce", "1 tsp banana ketchup", "½ tsp sugar", "1 tsp oil"],
         instructions: ["Mix all as marinade, rest 10 mins.", "Pan-grill or fry until caramelized.", "Optional: skewer for BBQ look."]
         },
+
+      {
+    name: "Fried Chicken",
+    category: "lunch",
+    description: "Crispy, golden fried chicken seasoned simply with salt and pepper.",
+    difficulty: 3,
+    prepTime: 25,
+    servings: 2,
+    imageUrl: "",
+    ingredients: ["1 chicken leg or breast", "2 tbsp flour", "Salt and pepper", "Oil for frying"],
+    instructions: ["Coat chicken in flour, salt, and pepper.", "Fry until golden and crisp.", "Drain excess oil and serve with rice."]
+  },
+  {
+    name: "Tuna Rice Bowl",
+    category: "lunch",
+    description: "Simple and quick tuna rice bowl topped with egg.",
+    difficulty: 2,
+    prepTime: 10,
+    servings: 1,
+    imageUrl: "",
+    ingredients: ["1 small can tuna (flakes in oil)", "1 egg", "1 tsp soy sauce", "Rice"],
+    instructions: ["Heat tuna slightly in its oil.", "Scramble an egg and mix it in.", "Add soy sauce and serve over rice."]
+  },
+  {
+    name: "Chicken Afritada",
+    category: "lunch",
+    description: "Tomato-based chicken stew with potatoes and bell peppers.",
+    difficulty: 3,
+    prepTime: 20,
+    servings: 2,
+    imageUrl: "",
+    ingredients: ["150g chicken", "2 tbsp tomato sauce", "¼ cup diced potatoes", "¼ cup bell peppers", "Garlic, onion, salt, pepper"],
+    instructions: ["Sauté garlic and onion.", "Add chicken and tomato sauce, cook for 15 mins.", "Add potatoes and bell pepper; simmer until tender."]
+  },
+  {
+    name: "Chicken Stir-Fry (Oyster Soy Sauce)",
+    category: "lunch",
+    description: "Quick stir-fried chicken and vegetables with oyster and soy sauce.",
+    difficulty: 4,
+    prepTime: 15,
+    servings: 2,
+    imageUrl: "",
+    ingredients: ["150g chicken", "½ cup mixed veggies", "1 tbsp soy sauce", "1 tsp oyster sauce", "Garlic, oil"],
+    instructions: ["Sauté garlic, add chicken until cooked.", "Add veggies, soy sauce, and oyster sauce.", "Stir-fry 5 mins and serve with rice."]
+  },
+  {
+    name: "Homemade Fish Fillet + Mayo Dip",
+    category: "lunch",
+    description: "Crispy fried fish fillet with creamy mayo-calamansi dip.",
+    difficulty: 2,
+    prepTime: 20,
+    servings: 2,
+    imageUrl: "",
+    ingredients: ["1 small fish fillet (cream dory or tilapia)", "2 tbsp flour", "Salt, pepper, oil", "1 tbsp mayo + ½ tsp calamansi for dip"],
+    instructions: ["Season fish, coat with flour.", "Fry until golden and crisp.", "Serve with dip and rice."]
+  },
+  {
+    name: "Garlic Butter Shrimp",
+    category: "lunch",
+    description: "Juicy shrimp cooked in butter and garlic, a quick seafood treat.",
+    difficulty: 3,
+    prepTime: 15,
+    servings: 2,
+    imageUrl: "",
+    ingredients: ["100g shrimp", "1 tbsp butter", "2 cloves garlic, minced", "Salt, pepper"],
+    instructions: ["Melt butter, sauté garlic.", "Add shrimp and cook until pink.", "Season with salt and pepper, serve with rice."]
+  }
       
       // Dinner (10 recipes)
       {
         name: "Pork BBQ (Pan-Grilled Version)",
-        category: "lunch",
+        category: "dinner",
         description: "Marinated pork grilled or pan-fried for a classic Filipino BBQ flavor.",
         difficulty: 3,
         prepTime: 15,
