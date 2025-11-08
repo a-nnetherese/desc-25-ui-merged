@@ -1,16 +1,19 @@
 import { useState, useRef, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import cartImage from "@/assets/shopping cart.png";
 import { Link } from "wouter";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeModal } from "@/components/recipe-modal";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { AddRecipeDialog } from "@/components/add-recipe-dialog";
 import type { Recipe } from "@shared/schema";
 
 export default function Home() {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [isAddRecipeDialogOpen, setIsAddRecipeDialogOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>("breakfast");
   const breakfastRef = useRef<HTMLDivElement>(null);
 
   const { data: recipes = [], isLoading } = useQuery<Recipe[]>({
@@ -28,21 +31,25 @@ export default function Home() {
   const breakfastRecipes = useMemo(() => recipes.filter((r) => r.category === "breakfast"), [recipes]);
   const lunchRecipes     = useMemo(() => recipes.filter((r) => r.category === "lunch"), [recipes]);
   const dinnerRecipes    = useMemo(() => recipes.filter((r) => r.category === "dinner"), [recipes]);
+  const snacksRecipes    = useMemo(() => recipes.filter((r) => r.category === "snacks"), [recipes]);
 
   // pagination state for each meal
   const [breakfastPage, setBreakfastPage] = useState(0);
   const [lunchPage, setLunchPage]         = useState(0);
   const [dinnerPage, setDinnerPage]       = useState(0);
+  const [snacksPage, setSnacksPage]       = useState(0);
 
   // chunk into pages of 3
   const breakfastChunks = useMemo(() => chunkArray(breakfastRecipes, 3), [breakfastRecipes]);
   const lunchChunks     = useMemo(() => chunkArray(lunchRecipes, 3), [lunchRecipes]);
   const dinnerChunks    = useMemo(() => chunkArray(dinnerRecipes, 3), [dinnerRecipes]);
+  const snacksChunks    = useMemo(() => chunkArray(snacksRecipes, 3), [snacksRecipes]);
 
   // visible slices to render (max 3 items)
   const visibleBreakfast = breakfastChunks[breakfastPage] || [];
   const visibleLunch     = lunchChunks[lunchPage] || [];
   const visibleDinner    = dinnerChunks[dinnerPage] || [];
+  const visibleSnacks    = snacksChunks[snacksPage] || [];
 
   // no-arg handlers for buttons (TypeScript-friendly)
   const nextBreakfast = () => {
@@ -68,6 +75,19 @@ export default function Home() {
   const prevDinner = () => {
     if (dinnerChunks.length === 0) return;
     setDinnerPage((p) => (p - 1 + dinnerChunks.length) % dinnerChunks.length);
+  };
+  const nextSnacks = () => {
+    if (snacksChunks.length === 0) return;
+    setSnacksPage((p) => (p + 1) % snacksChunks.length);
+  };
+  const prevSnacks = () => {
+    if (snacksChunks.length === 0) return;
+    setSnacksPage((p) => (p - 1 + snacksChunks.length) % snacksChunks.length);
+  };
+
+  const openAddRecipeDialog = (category: string) => {
+    setSelectedCategory(category);
+    setIsAddRecipeDialogOpen(true);
   };
   // ========================================================================
 
@@ -166,7 +186,18 @@ export default function Home() {
          {/* Breakfast */}
 <div ref={breakfastRef} className="mb-20 scroll-mt-8">
   <div className="flex items-center justify-between mb-8">
-    <h3 className="text-3xl md:text-4xl font-bold text-foreground">Breakfast</h3>
+    <div className="flex items-center gap-3">
+      <h3 className="text-3xl md:text-4xl font-bold text-foreground">Breakfast</h3>
+      <Button
+        size="icon"
+        variant="outline"
+        className="rounded-full"
+        onClick={() => openAddRecipeDialog("breakfast")}
+        data-testid="button-add-breakfast"
+      >
+        <Plus className="h-5 w-5" />
+      </Button>
+    </div>
     <span className="text-sm text-muted-foreground">See all</span>
   </div>
 
@@ -220,7 +251,18 @@ export default function Home() {
           {/* Lunch */}
 <div className="mb-20">
   <div className="flex items-center justify-between mb-8">
-    <h3 className="text-3xl md:text-4xl font-bold text-foreground">Lunch</h3>
+    <div className="flex items-center gap-3">
+      <h3 className="text-3xl md:text-4xl font-bold text-foreground">Lunch</h3>
+      <Button
+        size="icon"
+        variant="outline"
+        className="rounded-full"
+        onClick={() => openAddRecipeDialog("lunch")}
+        data-testid="button-add-lunch"
+      >
+        <Plus className="h-5 w-5" />
+      </Button>
+    </div>
     <span className="text-sm text-muted-foreground">See all</span>
   </div>
 
@@ -274,7 +316,18 @@ export default function Home() {
           {/* Dinner */}
 <div className="mb-20">
   <div className="flex items-center justify-between mb-8">
-    <h3 className="text-3xl md:text-4xl font-bold text-foreground">Dinner</h3>
+    <div className="flex items-center gap-3">
+      <h3 className="text-3xl md:text-4xl font-bold text-foreground">Dinner</h3>
+      <Button
+        size="icon"
+        variant="outline"
+        className="rounded-full"
+        onClick={() => openAddRecipeDialog("dinner")}
+        data-testid="button-add-dinner"
+      >
+        <Plus className="h-5 w-5" />
+      </Button>
+    </div>
     <span className="text-sm text-muted-foreground">See all</span>
   </div>
 
@@ -324,6 +377,70 @@ export default function Home() {
   )}
 </div>
 
+          {/* Snacks */}
+<div className="mb-20">
+  <div className="flex items-center justify-between mb-8">
+    <div className="flex items-center gap-3">
+      <h3 className="text-3xl md:text-4xl font-bold text-foreground">Snacks</h3>
+      <Button
+        size="icon"
+        variant="outline"
+        className="rounded-full"
+        onClick={() => openAddRecipeDialog("snacks")}
+        data-testid="button-add-snacks"
+      >
+        <Plus className="h-5 w-5" />
+      </Button>
+    </div>
+    <span className="text-sm text-muted-foreground">See all</span>
+  </div>
+
+  {isLoading ? (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="h-80 bg-card rounded-xl animate-pulse" />
+      ))}
+    </div>
+  ) : (
+    <div className="relative w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {visibleSnacks.length === 0 ? (
+          <div className="col-span-3 text-center text-muted-foreground">
+            No snack recipes yet.
+          </div>
+        ) : (
+          visibleSnacks.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              onClick={() => setSelectedRecipe(recipe)}
+            />
+          ))
+        )}
+      </div>
+
+      {snacksChunks.length > 1 && (
+        <>
+          <button
+            onClick={prevSnacks}
+            aria-label="Previous snacks"
+            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={nextSnacks}
+            aria-label="Next snacks"
+            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </>
+      )}
+    </div>
+  )}
+</div>
+
         </section>
       </div>
 
@@ -335,6 +452,13 @@ export default function Home() {
           onClose={() => setSelectedRecipe(null)}
         />
       )}
+
+      {/* Add Recipe Dialog */}
+      <AddRecipeDialog
+        isOpen={isAddRecipeDialogOpen}
+        onClose={() => setIsAddRecipeDialogOpen(false)}
+        defaultCategory={selectedCategory}
+      />
     </>
   );
 }

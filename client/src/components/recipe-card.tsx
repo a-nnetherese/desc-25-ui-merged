@@ -1,7 +1,10 @@
+import { useMutation } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Clock, Users } from "lucide-react";
+import { Plus, Clock, Users, ShoppingBasket } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import type { Recipe } from "@shared/schema";
 
 interface RecipeCardProps {
@@ -10,10 +13,36 @@ interface RecipeCardProps {
 }
 
 export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
+  const { toast } = useToast();
+
+  const addToBasket = useMutation({
+    mutationFn: async () => {
+      return apiRequest("POST", "/api/basket", {
+        recipeId: recipe.id,
+        recipeName: recipe.name,
+        servings: recipe.servings,
+        ingredients: recipe.ingredients,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/basket"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/grocery-list"] });
+      toast({
+        title: "Added to basket!",
+        description: `${recipe.name} (${recipe.servings} servings) has been added to your basket.`,
+      });
+    },
+  });
+
   const getDifficultyText = (difficulty: number) => {
     if (difficulty <= 2) return "Easy";
     if (difficulty <= 3) return "Medium";
     return "Hard";
+  };
+
+  const handleQuickAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToBasket.mutate();
   };
 
   return (
@@ -36,7 +65,7 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
             e.stopPropagation();
             onClick();
           }}
-          data-testid={`button-add-${recipe.id}`}
+          data-testid={`button-view-${recipe.id}`}
         >
           <Plus className="h-5 w-5" />
         </Button>
@@ -63,10 +92,21 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
           <Badge variant="secondary" className="text-xs">
             Difficulty: {getDifficultyText(recipe.difficulty)}
           </Badge>
+          <Button
+            size="sm"
+            variant="default"
+            className="rounded-full"
+            onClick={handleQuickAdd}
+            disabled={addToBasket.isPending}
+            data-testid={`button-quick-add-${recipe.id}`}
+          >
+            <ShoppingBasket className="h-4 w-4 mr-1" />
+            {addToBasket.isPending ? "Adding..." : "Add"}
+          </Button>
         </div>
       </div>
     </Card>

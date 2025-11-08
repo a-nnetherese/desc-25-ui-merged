@@ -528,6 +528,173 @@ export class MemStorage implements IStorage {
         imageUrl: "https://cdn.loveandlemons.com/wp-content/uploads/2025/02/301_LLBlog_FriedRice_47795.jpg",
         ingredients: ["1 cup rice", "½ cup chopped leftover veggies", "1 egg", "1 tbsp soy sauce", "Garlic, oil"],
         instructions: ["Sauté garlic, add veggies, then rice.", "Push aside, scramble egg, mix all together.", "Season with soy sauce and serve."]
+      },
+
+      // Snacks (15 recipes)
+      {
+        name: "Banana Chips",
+        category: "snacks",
+        description: "Crispy homemade banana chips, lightly salted and perfect for snacking.",
+        difficulty: 2,
+        prepTime: 25,
+        servings: 4,
+        imageUrl: "https://www.shutterstock.com/image-photo/banana-chips-bowl-on-white-600nw-1696140806.jpg",
+        ingredients: ["3 unripe saba bananas", "2 cups cooking oil", "Salt to taste"],
+        instructions: ["Slice bananas thinly using a mandoline or knife.", "Heat oil in a pan over medium heat.", "Fry banana slices until golden and crispy.", "Drain on paper towels and sprinkle with salt."]
+      },
+      {
+        name: "Turon (Banana Spring Rolls)",
+        category: "snacks",
+        description: "Sweet caramelized banana wrapped in crispy spring roll wrapper.",
+        difficulty: 2,
+        prepTime: 20,
+        servings: 6,
+        imageUrl: "https://panlasangpinoy.com/wp-content/uploads/2009/07/turon-recipe.jpg",
+        ingredients: ["6 saba bananas", "12 spring roll wrappers", "1 cup brown sugar", "Oil for frying"],
+        instructions: ["Slice bananas lengthwise.", "Wrap each banana in spring roll wrapper.", "Roll in brown sugar.", "Deep fry until golden and caramelized."]
+      },
+      {
+        name: "Cheese Sticks",
+        category: "snacks",
+        description: "Crispy fried cheese wrapped in spring roll wrappers.",
+        difficulty: 1,
+        prepTime: 15,
+        servings: 8,
+        imageUrl: "https://www.yummytummyaarthi.com/wp-content/uploads/2014/09/1-25.jpg",
+        ingredients: ["8 cheese sticks", "16 spring roll wrappers", "Oil for frying"],
+        instructions: ["Wrap each cheese stick in 2 layers of spring roll wrapper.", "Seal edges with water.", "Deep fry until golden and crispy.", "Serve hot with sweet chili sauce."]
+      },
+      {
+        name: "Lumpia Shanghai (Mini Spring Rolls)",
+        category: "snacks",
+        description: "Filipino-style meat spring rolls, crispy and savory.",
+        difficulty: 3,
+        prepTime: 35,
+        servings: 12,
+        imageUrl: "https://www.foxyfolksy.com/wp-content/uploads/2023/02/lumpia-shanghai-1200t.jpg",
+        ingredients: ["250g ground pork", "1 carrot, minced", "1 onion, minced", "2 cloves garlic, minced", "20 spring roll wrappers", "Oil for frying", "Salt and pepper"],
+        instructions: ["Mix ground pork, carrot, onion, garlic, salt, and pepper.", "Place filling on wrapper and roll tightly.", "Seal edges with water.", "Deep fry until golden brown."]
+      },
+      {
+        name: "Cassava Cake",
+        category: "snacks",
+        description: "Sweet and creamy cassava cake with a custard topping.",
+        difficulty: 3,
+        prepTime: 60,
+        servings: 8,
+        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2014/03/cassava-cake-3.jpg",
+        ingredients: ["2 cups grated cassava", "1 can condensed milk", "1 can coconut milk", "2 eggs", "½ cup sugar", "¼ cup butter"],
+        instructions: ["Mix cassava, condensed milk, coconut milk, eggs, and sugar.", "Pour into greased baking dish.", "Bake at 350°F for 45 minutes.", "Top with custard and broil until golden."]
+      },
+      {
+        name: "Puto (Steamed Rice Cakes)",
+        category: "snacks",
+        description: "Soft and fluffy steamed rice cakes, a Filipino favorite.",
+        difficulty: 2,
+        prepTime: 30,
+        servings: 12,
+        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2014/02/puto-1.jpg",
+        ingredients: ["2 cups rice flour", "1 cup sugar", "1 cup water", "2 tsp baking powder", "½ cup coconut milk", "Cheese slices for topping"],
+        instructions: ["Mix flour, sugar, and baking powder.", "Add water and coconut milk, mix well.", "Pour into molds and top with cheese.", "Steam for 15-20 minutes."]
+      },
+      {
+        name: "Palabok (Noodle Snack)",
+        category: "snacks",
+        description: "Rice noodles topped with savory shrimp sauce and garnishes.",
+        difficulty: 3,
+        prepTime: 30,
+        servings: 4,
+        imageUrl: "https://www.foxyfolksy.com/wp-content/uploads/2024/06/palabok-1200t.jpg",
+        ingredients: ["200g rice noodles", "½ cup shrimp", "2 tbsp shrimp paste", "1 cup pork broth", "2 eggs, hard-boiled", "Green onions", "Chicharron"],
+        instructions: ["Cook rice noodles according to package.", "Make sauce with shrimp paste and broth.", "Top noodles with sauce, shrimp, eggs, and garnishes."]
+      },
+      {
+        name: "Fishball Skewers",
+        category: "snacks",
+        description: "Street-style fishballs on skewers with sweet and spicy sauce.",
+        difficulty: 1,
+        prepTime: 15,
+        servings: 4,
+        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2023/02/fish-balls-4.jpg",
+        ingredients: ["20 fishballs", "2 tbsp soy sauce", "1 tbsp vinegar", "1 tbsp banana ketchup", "Chili flakes", "Bamboo skewers"],
+        instructions: ["Boil fishballs until cooked through.", "Thread onto skewers.", "Mix sauce ingredients.", "Serve with sauce for dipping."]
+      },
+      {
+        name: "Kwek-Kwek (Battered Quail Eggs)",
+        category: "snacks",
+        description: "Deep-fried quail eggs in orange batter, a Filipino street food classic.",
+        difficulty: 2,
+        prepTime: 20,
+        servings: 6,
+        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2013/05/kwek-kwek-1.jpg",
+        ingredients: ["12 quail eggs, hard-boiled", "1 cup flour", "½ cup cornstarch", "1 tsp orange food coloring", "Water", "Oil for frying"],
+        instructions: ["Mix flour, cornstarch, food coloring, and water to make batter.", "Dip eggs in batter.", "Deep fry until crispy and orange.", "Serve with vinegar sauce."]
+      },
+      {
+        name: "Peanut Butter Sandwich",
+        category: "snacks",
+        description: "Classic peanut butter sandwich, simple and satisfying.",
+        difficulty: 1,
+        prepTime: 5,
+        servings: 1,
+        imageUrl: "https://www.simplyrecipes.com/thmb/8caxM6p7BBjJqdjOx5Xfqz6a1Zg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Peanut-Butter-And-Jelly-Sandwich-LEAD-1-c94e1e3e8f7d4f0b9c6e7b8f8b3b9b9e.jpg",
+        ingredients: ["2 slices bread", "2 tbsp peanut butter", "1 tbsp jelly (optional)"],
+        instructions: ["Spread peanut butter on one slice of bread.", "Add jelly if desired.", "Top with second slice and cut in half."]
+      },
+      {
+        name: "Crackers with Cheese Spread",
+        category: "snacks",
+        description: "Quick and easy cheese and crackers snack.",
+        difficulty: 1,
+        prepTime: 5,
+        servings: 2,
+        imageUrl: "https://www.tasteofhome.com/wp-content/uploads/2018/01/Cheese-and-Crackers_EXPS_FT23_12344_EC_120822_3.jpg",
+        ingredients: ["10 crackers", "3 tbsp cheese spread or cream cheese"],
+        instructions: ["Spread cheese on crackers.", "Arrange on a plate and serve."]
+      },
+      {
+        name: "Banana Cue",
+        category: "snacks",
+        description: "Caramelized banana skewers, a popular Filipino street snack.",
+        difficulty: 2,
+        prepTime: 15,
+        servings: 4,
+        imageUrl: "https://panlasangpinoy.com/wp-content/uploads/2013/06/banana-cue.jpg",
+        ingredients: ["4 saba bananas", "½ cup brown sugar", "Oil for frying", "4 bamboo skewers"],
+        instructions: ["Heat oil in pan.", "Add bananas and sprinkle with brown sugar.", "Fry until caramelized, turning occasionally.", "Skewer and serve warm."]
+      },
+      {
+        name: "Polvoron (Powdered Milk Candy)",
+        category: "snacks",
+        description: "Traditional Filipino powdered milk candy, crumbly and sweet.",
+        difficulty: 2,
+        prepTime: 20,
+        servings: 12,
+        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2013/12/polvoron-1.jpg",
+        ingredients: ["2 cups toasted flour", "1 cup powdered milk", "1 cup sugar", "½ cup melted butter"],
+        instructions: ["Toast flour in a pan until lightly brown.", "Mix all ingredients together.", "Press into molds firmly.", "Wrap in cellophane or parchment paper."]
+      },
+      {
+        name: "Ensaymada (Sweet Cheese Bread)",
+        category: "snacks",
+        description: "Soft, buttery bread topped with butter, sugar, and cheese.",
+        difficulty: 4,
+        prepTime: 90,
+        servings: 8,
+        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2014/12/ensaymada-1.jpg",
+        ingredients: ["3 cups flour", "½ cup sugar", "1 tsp yeast", "3 eggs", "½ cup butter", "½ cup milk", "Grated cheese", "Extra butter and sugar for topping"],
+        instructions: ["Mix flour, sugar, yeast, eggs, and milk to form dough.", "Knead and let rise for 1 hour.", "Shape into coils, let rise again.", "Bake at 350°F for 20 minutes.", "Top with butter, sugar, and cheese."]
+      },
+      {
+        name: "Sweet Corn Kernels",
+        category: "snacks",
+        description: "Boiled sweet corn kernels with butter and salt.",
+        difficulty: 1,
+        prepTime: 10,
+        servings: 2,
+        imageUrl: "https://www.cookingclassy.com/wp-content/uploads/2019/07/boiled-corn-02.jpg",
+        ingredients: ["2 cups corn kernels", "1 tbsp butter", "Salt to taste", "Water for boiling"],
+        instructions: ["Boil corn kernels in water for 5-7 minutes.", "Drain and toss with butter and salt.", "Serve warm in a cup."]
       }
     ];
 

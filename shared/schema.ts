@@ -6,7 +6,7 @@ import { z } from "zod";
 export const recipes = pgTable("recipes", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
-  category: text("category").notNull(), // breakfast, lunch, dinner
+  category: text("category").notNull(), // breakfast, lunch, dinner, snacks
   description: text("description").notNull(),
   difficulty: integer("difficulty").notNull(), // 1-5
   prepTime: integer("prep_time").notNull(), // in minutes
