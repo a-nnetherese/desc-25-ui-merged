@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Plus, Minus, Clock, Users, ShoppingBasket } from "lucide-react";
+import { Plus, Minus, Clock, Users, ShoppingBasket, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import type { Recipe } from "@shared/schema";
@@ -51,6 +51,20 @@ export function RecipeModal({ recipe, isOpen, onClose }: RecipeModalProps) {
       toast({
         title: "Added to basket!",
         description: `${recipe.name} (${servings} servings) has been added to your basket.`,
+      });
+      onClose();
+    },
+  });
+
+  const deleteRecipe = useMutation({
+    mutationFn: async () => {
+      return apiRequest("DELETE", `/api/recipes/${recipe.id}`, {});
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/recipes"] });
+      toast({
+        title: "Recipe deleted",
+        description: `${recipe.name} has been deleted.`,
       });
       onClose();
     },
@@ -183,16 +197,31 @@ export function RecipeModal({ recipe, isOpen, onClose }: RecipeModalProps) {
             </div>
 
             <div className="p-8 pt-4 border-t bg-card">
-              <Button
-                size="lg"
-                className="w-full rounded-full"
-                onClick={() => addToBasket.mutate()}
-                disabled={addToBasket.isPending}
-                data-testid="button-add-to-basket"
-              >
-                <ShoppingBasket className="mr-2 h-5 w-5" />
-                {addToBasket.isPending ? "Adding..." : "Add to Basket"}
-              </Button>
+              <div className="flex gap-3">
+                {recipe.isCustom === 1 && (
+                  <Button
+                    size="lg"
+                    variant="destructive"
+                    className="flex-1 rounded-full"
+                    onClick={() => deleteRecipe.mutate()}
+                    disabled={deleteRecipe.isPending}
+                    data-testid="button-delete-recipe"
+                  >
+                    <Trash2 className="mr-2 h-5 w-5" />
+                    {deleteRecipe.isPending ? "Deleting..." : "Delete Recipe"}
+                  </Button>
+                )}
+                <Button
+                  size="lg"
+                  className={`${recipe.isCustom === 1 ? 'flex-1' : 'w-full'} rounded-full`}
+                  onClick={() => addToBasket.mutate()}
+                  disabled={addToBasket.isPending}
+                  data-testid="button-add-to-basket"
+                >
+                  <ShoppingBasket className="mr-2 h-5 w-5" />
+                  {addToBasket.isPending ? "Adding..." : "Add to Basket"}
+                </Button>
+              </div>
             </div>
           </div>
         </div>

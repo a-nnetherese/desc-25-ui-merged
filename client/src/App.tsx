@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Home from "@/pages/home";
 import GroceryList from "@/pages/grocery-list";
 import Inventory from "@/pages/inventory";
+import CategoryRecipes from "@/pages/category-recipes";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/grocery-list" component={GroceryList} />
       <Route path="/inventory" component={Inventory} />
+      <Route path="/category/:category" component={CategoryRecipes} />
       <Route component={NotFound} />
     </Switch>
   );

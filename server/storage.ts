@@ -700,7 +700,7 @@ export class MemStorage implements IStorage {
 
     sampleRecipes.forEach((recipe) => {
       const id = randomUUID();
-      this.recipes.set(id, { ...recipe, id });
+      this.recipes.set(id, { ...recipe, id, isCustom: 0 });
     });
   }
 
@@ -715,7 +715,7 @@ export class MemStorage implements IStorage {
 
   async createRecipe(insertRecipe: InsertRecipe): Promise<Recipe> {
     const id = randomUUID();
-    const recipe: Recipe = { ...insertRecipe, id };
+    const recipe: Recipe = { ...insertRecipe, id, isCustom: 1 };
     this.recipes.set(id, recipe);
     return recipe;
   }

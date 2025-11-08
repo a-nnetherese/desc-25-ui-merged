@@ -7,7 +7,7 @@ import { GreenWaveBackground } from "@/components/GreenWaveBackground";
 import { ManualInputModal } from "@/components/ManualInputModal";
 import { FullListModal } from "@/components/FullListModal";
 import { Link } from "wouter";
-import { QRScannerModal } from "@/components/QRScannerModal";
+import { PhotoScanModal } from "@/components/PhotoScanModal";
 import { GroceryListItem } from "@/components/GroceryListItem";
 import { type GroceryItem, type GroceryCategory } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
@@ -71,25 +71,14 @@ export default function Home() {
     deleteItemMutation.mutate(id);
   };
 
-  const handleQRScan = (data: string) => {
-    try {
-      const parsed = JSON.parse(data);
-      if (parsed.name && parsed.category) {
-        handleAddItem(parsed.name, parsed.category, parsed.quantity || 1);
-      } else {
-        toast({
-          title: "Invalid QR Code",
-          description: "The QR code does not contain valid grocery item data.",
-          variant: "destructive",
-        });
-      }
-    } catch (err) {
-      toast({
-        title: "Invalid QR Code",
-        description: "Unable to parse QR code data.",
-        variant: "destructive",
+  const handleItemsDetected = (items: Array<{ name: string; category: string; quantity: string }>) => {
+    items.forEach(item => {
+      addItemMutation.mutate({
+        name: item.name,
+        category: item.category as GroceryCategory,
+        quantity: item.quantity,
       });
-    }
+    });
   };
 
   const displayItems = items.slice(0, 6);
@@ -248,10 +237,10 @@ export default function Home() {
         }}
       />
       
-      <QRScannerModal
+      <PhotoScanModal
         open={scannerOpen}
         onOpenChange={setScannerOpen}
-        onScan={handleQRScan}
+        onItemsDetected={handleItemsDetected}
       />
     </div>
   );

@@ -198,7 +198,11 @@ export default function Home() {
         <Plus className="h-5 w-5" />
       </Button>
     </div>
-    <span className="text-sm text-muted-foreground">See all</span>
+    <Link href="/category/breakfast">
+      <Button variant="ghost" size="sm" className="text-sm hover-elevate" data-testid="link-see-all-breakfast">
+        See all
+      </Button>
+    </Link>
   </div>
 
   {isLoading ? (
@@ -263,7 +267,11 @@ export default function Home() {
         <Plus className="h-5 w-5" />
       </Button>
     </div>
-    <span className="text-sm text-muted-foreground">See all</span>
+    <Link href="/category/lunch">
+      <Button variant="ghost" size="sm" className="text-sm hover-elevate" data-testid="link-see-all-lunch">
+        See all
+      </Button>
+    </Link>
   </div>
 
   {isLoading ? (
@@ -328,7 +336,11 @@ export default function Home() {
         <Plus className="h-5 w-5" />
       </Button>
     </div>
-    <span className="text-sm text-muted-foreground">See all</span>
+    <Link href="/category/dinner">
+      <Button variant="ghost" size="sm" className="text-sm hover-elevate" data-testid="link-see-all-dinner">
+        See all
+      </Button>
+    </Link>
   </div>
 
   {isLoading ? (
@@ -392,7 +404,11 @@ export default function Home() {
         <Plus className="h-5 w-5" />
       </Button>
     </div>
-    <span className="text-sm text-muted-foreground">See all</span>
+    <Link href="/category/snacks">
+      <Button variant="ghost" size="sm" className="text-sm hover-elevate" data-testid="link-see-all-snacks">
+        See all
+      </Button>
+    </Link>
   </div>
 
   {isLoading ? (

@@ -14,6 +14,7 @@ export const recipes = pgTable("recipes", {
   imageUrl: text("image_url").notNull(),
   ingredients: text("ingredients").array().notNull(),
   instructions: text("instructions").array().notNull(),
+  isCustom: integer("is_custom").notNull().default(0), // 0 = pre-seeded, 1 = custom
 });
 
 export const basketItems = pgTable("basket_items", {
@@ -36,6 +37,7 @@ export const inventoryItems = pgTable("inventory_items", {
 
 export const insertRecipeSchema = createInsertSchema(recipes).omit({
   id: true,
+  isCustom: true, // Will be set automatically based on context
 });
 
 export const insertBasketItemSchema = createInsertSchema(basketItems).omit({
