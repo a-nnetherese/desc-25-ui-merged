@@ -12,27 +12,33 @@ Ecosina is a meal planning and grocery management application designed specifica
 ## Key Features
 
 ### 1. Smart Recipe Basket
-- Browse recipes organized by meal type (Breakfast, Lunch, Dinner)
+- Browse recipes organized by meal type (Breakfast, Lunch, Dinner, Snacks)
 - View detailed recipe information with ingredients and instructions
 - Customize serving quantities with automatic ingredient scaling
 - Add recipes to basket with selected portions
+- Create custom recipes with category selection
+- Delete custom recipes (only user-created recipes can be deleted)
+- "See All" pages for each category with 3-column grid layout
 
 ### 2. Auto-synced Grocery List
 - Automatically generate shopping list from selected recipes
 - Consolidated ingredient list to avoid duplicates
 - Check off items while shopping
 - Clear purchased items from the list
+- OCR-based photo scanning for receipts and grocery lists
+- Smart item detection and categorization from photos
 
 ### 3. Smart Grocery Scanner & Auto-Tracker
 - Add grocery items to inventory with purchase/expiry dates
 - Automatic categorization of items
 - Expiration date tracking with visual warnings
 - Smart sorting by expiration urgency (expired, urgent, soon, fresh)
-- **html5-qrcode**: QR code scanning functionality for mobile devices
+- **OCR.space API**: Photo scanning for receipt/list text extraction
 
 ## Pages
 - `/` - Home page with hero section and recipe browsing
-- `/grocery-list` - Shopping list with checkbox interface
+- `/category/:category` - Category view showing all recipes in 3-column grid
+- `/grocery-list` - Shopping list with checkbox interface and photo scanning
 - `/inventory` - Inventory tracker with expiration monitoring
 
 ## Color Scheme
@@ -52,3 +58,10 @@ Ecosina is a meal planning and grocery management application designed specifica
 - Built all frontend components with exceptional visual quality
 - Created smooth scroll functionality from hero to recipe sections
 - Designed expandable recipe modal with ingredient scaling
+- Added isCustom field to schema to distinguish user-created recipes from seeded recipes (Nov 8, 2025)
+- Implemented delete functionality for custom recipes with trash icon button in RecipeModal (Nov 8, 2025)
+- Created category-recipes.tsx page displaying all recipes in a category with 3-column grid layout (Nov 8, 2025)
+- Removed QR code scanner and replaced with OCR-based PhotoScanModal using OCR.space API (Nov 8, 2025)
+- Integrated OCR photo scanning for receipts and grocery lists with proper category validation (Nov 8, 2025)
+- Removed pink hover circle from recipe cards for cleaner UI (Nov 8, 2025)
+- Updated all "See all" links to navigate to category-specific pages (Nov 8, 2025)
