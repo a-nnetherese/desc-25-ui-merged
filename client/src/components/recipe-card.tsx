@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Clock, Users, ShoppingBasket } from "lucide-react";
+import { Clock, Users, ShoppingBasket } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import type { Recipe } from "@shared/schema";
@@ -57,18 +57,6 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
           alt={recipe.name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <Button
-          size="icon"
-          variant="secondary"
-          className="absolute bottom-3 right-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClick();
-          }}
-          data-testid={`button-view-${recipe.id}`}
-        >
-          <Plus className="h-5 w-5" />
-        </Button>
       </div>
       
       <div className="p-6 space-y-3">
