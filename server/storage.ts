@@ -530,10 +530,10 @@ export class MemStorage implements IStorage {
         instructions: ["Sauté garlic, add veggies, then rice.", "Push aside, scramble egg, mix all together.", "Season with soy sauce and serve."]
       },
 
-      // Snacks (15 recipes)
+      // snackss (15 recipes)
        {
       name: "Mini Nacho Bowl",
-      category: "snack",
+      category: "snacks",
       description: "Quick nacho bowl with melted cheese, salsa, and optional corn or beef.",
       difficulty: 2,
       prepTime: 10,
@@ -544,8 +544,8 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Cheesy Garlic Bread Bites",
-      category: "snack",
-      description: "Toasty garlic bread bites with melted cheese, perfect for snacking.",
+      category: "snacks",
+      description: "Toasty garlic bread bites with melted cheese, perfect for snacksing.",
       difficulty: 1,
       prepTime: 5,
       servings: 1,
@@ -555,7 +555,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Ham & Cheese Quesadilla (Filipino Version)",
-      category: "snack",
+      category: "snacks",
       description: "Quick ham and cheese quesadilla using tortilla or bread.",
       difficulty: 1,
       prepTime: 5,
@@ -566,7 +566,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Milo Mug Cake",
-      category: "snack",
+      category: "snacks",
       description: "Microwave Milo mug cake, soft and chocolaty in just a minute.",
       difficulty: 2,
       prepTime: 5,
@@ -577,7 +577,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Egg Mayo Sandwich",
-      category: "snack",
+      category: "snacks",
       description: "Simple boiled egg sandwich with creamy mayonnaise.",
       difficulty: 1,
       prepTime: 5,
@@ -588,7 +588,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Microwave Corn Butter Cup",
-      category: "snack",
+      category: "snacks",
       description: "Sweet and buttery corn cup, ready in just a couple minutes.",
       difficulty: 1,
       prepTime: 5,
@@ -599,7 +599,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Cheesy Instant Fries",
-      category: "snack",
+      category: "snacks",
       description: "Quick cheesy fries drizzled with mayo, ready in minutes.",
       difficulty: 2,
       prepTime: 10,
@@ -610,7 +610,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Microwave Cheesy Corned Beef Toast",
-      category: "snack",
+      category: "snacks",
       description: "Toasty bread with corned beef and melted cheese in just 1 minute.",
       difficulty: 1,
       prepTime: 5,
@@ -620,19 +620,19 @@ export class MemStorage implements IStorage {
       instructions: ["Spread corned beef evenly on bread.", "Top with cheese.", "Microwave for 1 minute until heated and cheese melts."]
     },
     {
-      name: "Tuna or Chicken Rice Bowl (Snack-Size)",
-      category: "snack",
-      description: "Small rice bowl topped with tuna or chicken for a quick snack.",
+      name: "Tuna or Chicken Rice Bowl (snacks-Size)",
+      category: "snacks",
+      description: "Small rice bowl topped with tuna or chicken for a quick snacks.",
       difficulty: 2,
       prepTime: 5,
       servings: 1,
       imageUrl: "https://www.simplyrecipes.com/thmb/uOOGnoA0Vmzbk3mOtJK6eYOOgu4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/simply-recipes-spicy-tuna-rice-bowl-lead-1-cc5960e3dd6241479c2d36f57a7b3e14.jpg",
       ingredients: ["½ cup cooked rice", "2 tbsp canned tuna or shredded cooked chicken", "1 tsp soy sauce", "1 tsp mayonnaise", "Optional: ½ boiled egg"],
-      instructions: ["Combine rice, tuna/chicken, soy sauce, and mayo in a bowl.", "Microwave 30–45 seconds to warm.", "Add egg on top for a heavier snack."]
+      instructions: ["Combine rice, tuna/chicken, soy sauce, and mayo in a bowl.", "Microwave 30–45 seconds to warm.", "Add egg on top for a heavier snacks."]
     },
     {
       name: "Chocolate Graham Bites",
-      category: "snack",
+      category: "snacks",
       description: "Graham crackers layered with chocolate and marshmallow, microwaved until gooey.",
       difficulty: 1,
       prepTime: 5,
@@ -643,7 +643,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Peanut Butter Oat Balls",
-      category: "snack",
+      category: "snacks",
       description: "No-bake peanut butter oat balls, a healthy sweet bite.",
       difficulty: 1,
       prepTime: 10,
@@ -654,7 +654,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Mini Lumpia Wraps",
-      category: "snack",
+      category: "snacks",
       description: "Small spring rolls filled with giniling or tuna, quick and tasty.",
       difficulty: 2,
       prepTime: 10,
@@ -665,8 +665,8 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Pandesal Burger Slider",
-      category: "snack",
-      description: "Mini pandesal burger with cheese and patty, perfect for snacks.",
+      category: "snacks",
+      description: "Mini pandesal burger with cheese and patty, perfect for snackss.",
       difficulty: 2,
       prepTime: 5,
       servings: 1,
@@ -676,7 +676,7 @@ export class MemStorage implements IStorage {
     },
     {
       name: "Fruit Cup with Condensed Milk",
-      category: "snack",
+      category: "snacks",
       description: "Fresh fruit cup drizzled with sweet condensed milk.",
       difficulty: 1,
       prepTime: 5,
