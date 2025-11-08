@@ -351,7 +351,7 @@ export class MemStorage implements IStorage {
     ingredients: ["100g shrimp", "1 tbsp butter", "2 cloves garlic, minced", "Salt, pepper"],
     instructions: ["Melt butter, sauté garlic.", "Add shrimp and cook until pink.", "Season with salt and pepper, serve with rice."]
   }
-      
+     ]; 
       // Dinner (10 recipes)
       {
         name: "Pork BBQ (Pan-Grilled Version)",
