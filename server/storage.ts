@@ -531,171 +531,160 @@ export class MemStorage implements IStorage {
       },
 
       // Snacks (15 recipes)
-      {
-        name: "Banana Chips",
-        category: "snacks",
-        description: "Crispy homemade banana chips, lightly salted and perfect for snacking.",
-        difficulty: 2,
-        prepTime: 25,
-        servings: 4,
-        imageUrl: "https://www.shutterstock.com/image-photo/banana-chips-bowl-on-white-600nw-1696140806.jpg",
-        ingredients: ["3 unripe saba bananas", "2 cups cooking oil", "Salt to taste"],
-        instructions: ["Slice bananas thinly using a mandoline or knife.", "Heat oil in a pan over medium heat.", "Fry banana slices until golden and crispy.", "Drain on paper towels and sprinkle with salt."]
-      },
-      {
-        name: "Turon (Banana Spring Rolls)",
-        category: "snacks",
-        description: "Sweet caramelized banana wrapped in crispy spring roll wrapper.",
-        difficulty: 2,
-        prepTime: 20,
-        servings: 6,
-        imageUrl: "https://panlasangpinoy.com/wp-content/uploads/2009/07/turon-recipe.jpg",
-        ingredients: ["6 saba bananas", "12 spring roll wrappers", "1 cup brown sugar", "Oil for frying"],
-        instructions: ["Slice bananas lengthwise.", "Wrap each banana in spring roll wrapper.", "Roll in brown sugar.", "Deep fry until golden and caramelized."]
-      },
-      {
-        name: "Cheese Sticks",
-        category: "snacks",
-        description: "Crispy fried cheese wrapped in spring roll wrappers.",
-        difficulty: 1,
-        prepTime: 15,
-        servings: 8,
-        imageUrl: "https://www.yummytummyaarthi.com/wp-content/uploads/2014/09/1-25.jpg",
-        ingredients: ["8 cheese sticks", "16 spring roll wrappers", "Oil for frying"],
-        instructions: ["Wrap each cheese stick in 2 layers of spring roll wrapper.", "Seal edges with water.", "Deep fry until golden and crispy.", "Serve hot with sweet chili sauce."]
-      },
-      {
-        name: "Lumpia Shanghai (Mini Spring Rolls)",
-        category: "snacks",
-        description: "Filipino-style meat spring rolls, crispy and savory.",
-        difficulty: 3,
-        prepTime: 35,
-        servings: 12,
-        imageUrl: "https://www.foxyfolksy.com/wp-content/uploads/2023/02/lumpia-shanghai-1200t.jpg",
-        ingredients: ["250g ground pork", "1 carrot, minced", "1 onion, minced", "2 cloves garlic, minced", "20 spring roll wrappers", "Oil for frying", "Salt and pepper"],
-        instructions: ["Mix ground pork, carrot, onion, garlic, salt, and pepper.", "Place filling on wrapper and roll tightly.", "Seal edges with water.", "Deep fry until golden brown."]
-      },
-      {
-        name: "Cassava Cake",
-        category: "snacks",
-        description: "Sweet and creamy cassava cake with a custard topping.",
-        difficulty: 3,
-        prepTime: 60,
-        servings: 8,
-        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2014/03/cassava-cake-3.jpg",
-        ingredients: ["2 cups grated cassava", "1 can condensed milk", "1 can coconut milk", "2 eggs", "½ cup sugar", "¼ cup butter"],
-        instructions: ["Mix cassava, condensed milk, coconut milk, eggs, and sugar.", "Pour into greased baking dish.", "Bake at 350°F for 45 minutes.", "Top with custard and broil until golden."]
-      },
-      {
-        name: "Puto (Steamed Rice Cakes)",
-        category: "snacks",
-        description: "Soft and fluffy steamed rice cakes, a Filipino favorite.",
-        difficulty: 2,
-        prepTime: 30,
-        servings: 12,
-        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2014/02/puto-1.jpg",
-        ingredients: ["2 cups rice flour", "1 cup sugar", "1 cup water", "2 tsp baking powder", "½ cup coconut milk", "Cheese slices for topping"],
-        instructions: ["Mix flour, sugar, and baking powder.", "Add water and coconut milk, mix well.", "Pour into molds and top with cheese.", "Steam for 15-20 minutes."]
-      },
-      {
-        name: "Palabok (Noodle Snack)",
-        category: "snacks",
-        description: "Rice noodles topped with savory shrimp sauce and garnishes.",
-        difficulty: 3,
-        prepTime: 30,
-        servings: 4,
-        imageUrl: "https://www.foxyfolksy.com/wp-content/uploads/2024/06/palabok-1200t.jpg",
-        ingredients: ["200g rice noodles", "½ cup shrimp", "2 tbsp shrimp paste", "1 cup pork broth", "2 eggs, hard-boiled", "Green onions", "Chicharron"],
-        instructions: ["Cook rice noodles according to package.", "Make sauce with shrimp paste and broth.", "Top noodles with sauce, shrimp, eggs, and garnishes."]
-      },
-      {
-        name: "Fishball Skewers",
-        category: "snacks",
-        description: "Street-style fishballs on skewers with sweet and spicy sauce.",
-        difficulty: 1,
-        prepTime: 15,
-        servings: 4,
-        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2023/02/fish-balls-4.jpg",
-        ingredients: ["20 fishballs", "2 tbsp soy sauce", "1 tbsp vinegar", "1 tbsp banana ketchup", "Chili flakes", "Bamboo skewers"],
-        instructions: ["Boil fishballs until cooked through.", "Thread onto skewers.", "Mix sauce ingredients.", "Serve with sauce for dipping."]
-      },
-      {
-        name: "Kwek-Kwek (Battered Quail Eggs)",
-        category: "snacks",
-        description: "Deep-fried quail eggs in orange batter, a Filipino street food classic.",
-        difficulty: 2,
-        prepTime: 20,
-        servings: 6,
-        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2013/05/kwek-kwek-1.jpg",
-        ingredients: ["12 quail eggs, hard-boiled", "1 cup flour", "½ cup cornstarch", "1 tsp orange food coloring", "Water", "Oil for frying"],
-        instructions: ["Mix flour, cornstarch, food coloring, and water to make batter.", "Dip eggs in batter.", "Deep fry until crispy and orange.", "Serve with vinegar sauce."]
-      },
-      {
-        name: "Peanut Butter Sandwich",
-        category: "snacks",
-        description: "Classic peanut butter sandwich, simple and satisfying.",
-        difficulty: 1,
-        prepTime: 5,
-        servings: 1,
-        imageUrl: "https://www.simplyrecipes.com/thmb/8caxM6p7BBjJqdjOx5Xfqz6a1Zg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Peanut-Butter-And-Jelly-Sandwich-LEAD-1-c94e1e3e8f7d4f0b9c6e7b8f8b3b9b9e.jpg",
-        ingredients: ["2 slices bread", "2 tbsp peanut butter", "1 tbsp jelly (optional)"],
-        instructions: ["Spread peanut butter on one slice of bread.", "Add jelly if desired.", "Top with second slice and cut in half."]
-      },
-      {
-        name: "Crackers with Cheese Spread",
-        category: "snacks",
-        description: "Quick and easy cheese and crackers snack.",
-        difficulty: 1,
-        prepTime: 5,
-        servings: 2,
-        imageUrl: "https://www.tasteofhome.com/wp-content/uploads/2018/01/Cheese-and-Crackers_EXPS_FT23_12344_EC_120822_3.jpg",
-        ingredients: ["10 crackers", "3 tbsp cheese spread or cream cheese"],
-        instructions: ["Spread cheese on crackers.", "Arrange on a plate and serve."]
-      },
-      {
-        name: "Banana Cue",
-        category: "snacks",
-        description: "Caramelized banana skewers, a popular Filipino street snack.",
-        difficulty: 2,
-        prepTime: 15,
-        servings: 4,
-        imageUrl: "https://panlasangpinoy.com/wp-content/uploads/2013/06/banana-cue.jpg",
-        ingredients: ["4 saba bananas", "½ cup brown sugar", "Oil for frying", "4 bamboo skewers"],
-        instructions: ["Heat oil in pan.", "Add bananas and sprinkle with brown sugar.", "Fry until caramelized, turning occasionally.", "Skewer and serve warm."]
-      },
-      {
-        name: "Polvoron (Powdered Milk Candy)",
-        category: "snacks",
-        description: "Traditional Filipino powdered milk candy, crumbly and sweet.",
-        difficulty: 2,
-        prepTime: 20,
-        servings: 12,
-        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2013/12/polvoron-1.jpg",
-        ingredients: ["2 cups toasted flour", "1 cup powdered milk", "1 cup sugar", "½ cup melted butter"],
-        instructions: ["Toast flour in a pan until lightly brown.", "Mix all ingredients together.", "Press into molds firmly.", "Wrap in cellophane or parchment paper."]
-      },
-      {
-        name: "Ensaymada (Sweet Cheese Bread)",
-        category: "snacks",
-        description: "Soft, buttery bread topped with butter, sugar, and cheese.",
-        difficulty: 4,
-        prepTime: 90,
-        servings: 8,
-        imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2014/12/ensaymada-1.jpg",
-        ingredients: ["3 cups flour", "½ cup sugar", "1 tsp yeast", "3 eggs", "½ cup butter", "½ cup milk", "Grated cheese", "Extra butter and sugar for topping"],
-        instructions: ["Mix flour, sugar, yeast, eggs, and milk to form dough.", "Knead and let rise for 1 hour.", "Shape into coils, let rise again.", "Bake at 350°F for 20 minutes.", "Top with butter, sugar, and cheese."]
-      },
-      {
-        name: "Sweet Corn Kernels",
-        category: "snacks",
-        description: "Boiled sweet corn kernels with butter and salt.",
-        difficulty: 1,
-        prepTime: 10,
-        servings: 2,
-        imageUrl: "https://www.cookingclassy.com/wp-content/uploads/2019/07/boiled-corn-02.jpg",
-        ingredients: ["2 cups corn kernels", "1 tbsp butter", "Salt to taste", "Water for boiling"],
-        instructions: ["Boil corn kernels in water for 5-7 minutes.", "Drain and toss with butter and salt.", "Serve warm in a cup."]
-      }
+       {
+      name: "Mini Nacho Bowl",
+      category: "snack",
+      description: "Quick nacho bowl with melted cheese, salsa, and optional corn or beef.",
+      difficulty: 2,
+      prepTime: 10,
+      servings: 1,
+      imageUrl: "https://simple-veganista.com/wp-content/uploads/2019/08/nacho-bowl-recipe-1.jpg",
+      ingredients: ["1 cup store-bought tortilla chips", "2 tbsp grated cheese or cheese spread", "2 tbsp salsa (or diced tomato + 1 tsp ketchup + 1 tsp onion)", "Optional: 1 tbsp canned corn or 2 tbsp cooked ground beef"],
+      instructions: ["In a microwave-safe bowl, layer chips, cheese, and salsa.", "Microwave for 30–45 seconds until cheese melts.", "Top with corn or beef if desired, then serve warm."]
+    },
+    {
+      name: "Cheesy Garlic Bread Bites",
+      category: "snack",
+      description: "Toasty garlic bread bites with melted cheese, perfect for snacking.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7Qg8_Iv3E_QZgM10bhz-2gmJXAegB8DdlfA&s",
+      ingredients: ["2 slices loaf bread", "1 tbsp butter or margarine", "½ tsp garlic powder", "2 tbsp grated cheese"],
+      instructions: ["Spread butter on bread and sprinkle garlic powder.", "Add cheese on top.", "Toast in microwave (45 sec–1 min) or mini-oven toaster until cheese melts and edges crisp, then slice into bite-size pieces."]
+    },
+    {
+      name: "Ham & Cheese Quesadilla (Filipino Version)",
+      category: "snack",
+      description: "Quick ham and cheese quesadilla using tortilla or bread.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5uwljscURvHM4L7GeXi1yIf1g5d9DhMm2iw&s",
+      ingredients: ["1 small tortilla or 2 slices bread", "1 slice ham", "1 slice cheese"],
+      instructions: ["Layer ham and cheese between bread or tortilla.", "Microwave for 40–60 seconds until cheese melts.", "Slice into triangles and enjoy."]
+    },
+    {
+      name: "Milo Mug Cake",
+      category: "snack",
+      description: "Microwave Milo mug cake, soft and chocolaty in just a minute.",
+      difficulty: 2,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2WX7NhvDdwEHBesCt9b9VH6mChiDKlDHXfg&s",
+      ingredients: ["4 tbsp Milo", "3 tbsp all-purpose flour", "3 tbsp milk (or water)", "1 tbsp oil", "1 tsp sugar", "½ tsp baking powder"],
+      instructions: ["Combine all ingredients in a microwave-safe mug; mix until smooth.", "Microwave for 1 minute (add 10–15 seconds if still wet in the center).", "Optional: drizzle with condensed milk or peanut butter before serving."]
+    },
+    {
+      name: "Egg Mayo Sandwich",
+      category: "snack",
+      description: "Simple boiled egg sandwich with creamy mayonnaise.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://www.kewpie.com.my/sites/default/files/styles/wide/public/content/recipe/img/2021-08/20200324230119_egg%202.jpg?itok=iZRPuDM1",
+      ingredients: ["1 boiled egg", "1 tbsp mayonnaise", "Salt & pepper to taste", "2 slices bread"],
+      instructions: ["Mash egg with mayo, salt, and pepper.", "Spread on bread and close sandwich.", "Toast lightly if desired."]
+    },
+    {
+      name: "Microwave Corn Butter Cup",
+      category: "snack",
+      description: "Sweet and buttery corn cup, ready in just a couple minutes.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://noobcook.com/wp-content/uploads/2009/06/3640353564_3a40a33677_o.jpg",
+      ingredients: ["½ cup canned or frozen corn", "1 tsp butter", "Pinch of salt", "Optional: 1 tbsp grated cheese"],
+      instructions: ["Combine corn, butter, and salt in a microwave-safe cup.", "Microwave for 1–2 minutes.", "Mix well and top with cheese if desired."]
+    },
+    {
+      name: "Cheesy Instant Fries",
+      category: "snack",
+      description: "Quick cheesy fries drizzled with mayo, ready in minutes.",
+      difficulty: 2,
+      prepTime: 10,
+      servings: 1,
+      imageUrl: "https://www.acouplecooks.com/wp-content/uploads/2022/06/Cheese-Fries-005.jpg",
+      ingredients: ["1 cup frozen fries or boiled potato slices", "2 tbsp cheese spread or grated cheese", "1 tsp mayonnaise"],
+      instructions: ["Air fry fries for 8–10 minutes or microwave until hot.", "Drizzle with cheese and mayo.", "Microwave 20 seconds more if you want the cheese melty."]
+    },
+    {
+      name: "Microwave Cheesy Corned Beef Toast",
+      category: "snack",
+      description: "Toasty bread with corned beef and melted cheese in just 1 minute.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://images.yummy.ph/yummy/uploads/2017/01/grilled-cheese-corned-beef-6-500x360.jpg",
+      ingredients: ["1 slice bread", "2 tbsp canned corned beef", "2 tbsp grated cheese"],
+      instructions: ["Spread corned beef evenly on bread.", "Top with cheese.", "Microwave for 1 minute until heated and cheese melts."]
+    },
+    {
+      name: "Tuna or Chicken Rice Bowl (Snack-Size)",
+      category: "snack",
+      description: "Small rice bowl topped with tuna or chicken for a quick snack.",
+      difficulty: 2,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://www.simplyrecipes.com/thmb/uOOGnoA0Vmzbk3mOtJK6eYOOgu4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/simply-recipes-spicy-tuna-rice-bowl-lead-1-cc5960e3dd6241479c2d36f57a7b3e14.jpg",
+      ingredients: ["½ cup cooked rice", "2 tbsp canned tuna or shredded cooked chicken", "1 tsp soy sauce", "1 tsp mayonnaise", "Optional: ½ boiled egg"],
+      instructions: ["Combine rice, tuna/chicken, soy sauce, and mayo in a bowl.", "Microwave 30–45 seconds to warm.", "Add egg on top for a heavier snack."]
+    },
+    {
+      name: "Chocolate Graham Bites",
+      category: "snack",
+      description: "Graham crackers layered with chocolate and marshmallow, microwaved until gooey.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://images.squarespace-cdn.com/content/v1/5ee6b529e604570272bc3337/1678379234819-48DQI44FI7HSC9ADV90P/F96DD9B2-778B-47F5-951D-94519E6B7A24.jpeg",
+      ingredients: ["4 graham crackers", "2 tbsp chocolate spread", "2 small marshmallows"],
+      instructions: ["Stack graham + chocolate + marshmallow + graham.", "Microwave 10–15 seconds until soft and gooey.", "Let cool slightly before eating."]
+    },
+    {
+      name: "Peanut Butter Oat Balls",
+      category: "snack",
+      description: "No-bake peanut butter oat balls, a healthy sweet bite.",
+      difficulty: 1,
+      prepTime: 10,
+      servings: 1,
+      imageUrl: "https://thecookiedoughdiaries.com/wp-content/uploads/2021/12/3-ingredient-peanut-butter-oatmeal-balls-5-1200x1800.jpg",
+      ingredients: ["¼ cup rolled oats", "2 tbsp peanut butter", "1 tbsp honey or condensed milk"],
+      instructions: ["Mix everything in a small bowl until sticky.", "Roll into bite-sized balls.", "Chill in the fridge for 10–15 minutes before eating."]
+    },
+    {
+      name: "Mini Lumpia Wraps",
+      category: "snack",
+      description: "Small spring rolls filled with giniling or tuna, quick and tasty.",
+      difficulty: 2,
+      prepTime: 10,
+      servings: 1,
+      imageUrl: "https://www.allrecipes.com/thmb/LLudQLmfYVebaH8ycc6dIOzcrh0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/35151-traditional-filipino-lumpia-ddmfs-hero-1x2-0745-d25195def74049598ca7cfa057f9d77e.jpg",
+      ingredients: ["3 tbsp leftover giniling or tuna", "4 small lumpia wrappers", "Optional: 1 tbsp mayo or ketchup for dip"],
+      instructions: ["Place 1 tbsp filling per wrapper, roll tightly, seal edges with water.", "Air fry for 3–5 minutes or microwave 1–2 minutes (turn halfway).", "Serve with dip."]
+    },
+    {
+      name: "Pandesal Burger Slider",
+      category: "snack",
+      description: "Mini pandesal burger with cheese and patty, perfect for snacks.",
+      difficulty: 2,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0sif-6btMS9f_jFhy_XnYrMytHxZ8FVaxzvvRh_Gp4YK5j08Dq-I8aVRixMkxjeDiKOs&usqp=CAU",
+      ingredients: ["1 pandesal", "1 small burger patty or sliced hotdog", "1 slice cheese", "1 tsp mayonnaise"],
+      instructions: ["Cut pandesal in half.", "Add patty/hotdog, cheese, and mayo.", "Microwave 30–45 seconds or toast until warm."]
+    },
+    {
+      name: "Fruit Cup with Condensed Milk",
+      category: "snack",
+      description: "Fresh fruit cup drizzled with sweet condensed milk.",
+      difficulty: 1,
+      prepTime: 5,
+      servings: 1,
+      imageUrl: "https://www.thetravelpalate.com/wp-content/uploads/2024/10/fruit-salad-with-condensed-milk-26.jpg",
+      ingredients: ["½ banana, sliced", "¼ apple, diced (or ¼ cup canned fruit cocktail)", "1 tbsp condensed milk or cream"],
+      instructions: ["Combine all fruits in a small cup or bowl.", "Drizzle condensed milk or cream.", "Chill before eating (optional)."]
+    }
     ];
 
     sampleRecipes.forEach((recipe) => {
