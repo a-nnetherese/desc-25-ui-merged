@@ -8,6 +8,7 @@ import {
   insertInventoryItemSchema,
   type GroceryCategory,
 } from "@shared/schema";
+import { mergeIngredients, normalizeIngredient } from "./ingredientDeduplication";
 
 function categorizeIngredient(name: string): GroceryCategory {
   const lowerName = name.toLowerCase();
@@ -88,74 +89,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const data = insertBasketItemSchema.parse(req.body);
       const item = await storage.createBasketItem(data);
 
-      // Auto-sync to grocery list
-      const ingredientMap = new Map<string, { quantity: string; unit: string }>();
-      
-      for (const ingredient of data.ingredients) {
-        // Simple ingredient parsing
-        const match = ingredient.match(/^([\d.\/]+)\s*(\w+)?\s+(.+)$/);
-        if (match) {
-          const [, quantity, unit, name] = match;
-          const cleanName = name.trim().toLowerCase();
-          const key = cleanName;
-          
-          if (ingredientMap.has(key)) {
-            const existing = ingredientMap.get(key)!;
-            // Simple quantity addition (works for whole numbers)
-            const existingQty = parseFloat(existing.quantity) || 0;
-            const newQty = parseFloat(quantity) || 0;
-            ingredientMap.set(key, {
-              quantity: (existingQty + newQty).toString(),
-              unit: unit || existing.unit,
-            });
-          } else {
-            ingredientMap.set(key, { quantity, unit: unit || "" });
-          }
-        } else {
-          // If parsing fails, just add the whole string
-          const key = ingredient.toLowerCase();
-          ingredientMap.set(key, { quantity: "", unit: "" });
-        }
-      }
-
-      // Clear existing grocery list and repopulate from all basket items
+      // Clear existing grocery list and repopulate from all basket items with deduplication
       await storage.clearGroceryList();
       const allBasketItems = await storage.getAllBasketItems();
-      const consolidatedIngredients = new Map<string, { quantity: string; unit: string }>();
-
+      
+      // Collect all ingredients from all basket items
+      const allIngredients: string[] = [];
       for (const basketItem of allBasketItems) {
-        for (const ingredient of basketItem.ingredients) {
-          const match = ingredient.match(/^([\d.\/]+)\s*(\w+)?\s+(.+)$/);
-          if (match) {
-            const [, quantity, unit, name] = match;
-            const cleanName = name.trim().toLowerCase();
-            const key = cleanName;
-            
-            if (consolidatedIngredients.has(key)) {
-              const existing = consolidatedIngredients.get(key)!;
-              const existingQty = parseFloat(existing.quantity) || 0;
-              const newQty = parseFloat(quantity) || 0;
-              consolidatedIngredients.set(key, {
-                quantity: (existingQty + newQty).toString(),
-                unit: unit || existing.unit,
-              });
-            } else {
-              consolidatedIngredients.set(key, { quantity, unit: unit || "" });
-            }
-          } else {
-            const key = ingredient.toLowerCase();
-            consolidatedIngredients.set(key, { quantity: "", unit: "" });
-          }
-        }
+        allIngredients.push(...basketItem.ingredients);
       }
 
-      // Create grocery items
-      for (const [name, { quantity, unit }] of consolidatedIngredients) {
+      // Merge duplicate ingredients using deduplication logic
+      const merged = mergeIngredients(allIngredients);
+
+      // Create grocery items from merged ingredients
+      for (const [key, { quantity, unit, name }] of merged) {
         const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+        const quantityStr = unit ? `${quantity} ${unit}` : quantity.toString();
+        
         await storage.createGroceryItem({
           name: capitalizedName,
           category: categorizeIngredient(capitalizedName),
-          quantity: unit ? `${quantity} ${unit}` : (quantity || "1"),
+          quantity: quantityStr,
           checked: 0,
         });
       }
@@ -176,6 +131,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/grocery-list", async (_req, res) => {
     const items = await storage.getAllGroceryItems();
     res.json(items);
+  });
+
+  app.post("/api/grocery-list", async (req, res) => {
+    try {
+      const data = insertGroceryItemSchema.parse(req.body);
+      const item = await storage.createGroceryItem(data);
+      res.json(item);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid grocery item data" });
+    }
   });
 
   app.patch("/api/grocery-list/:id/toggle", async (req, res) => {

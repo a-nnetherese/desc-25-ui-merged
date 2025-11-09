@@ -9,9 +9,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
 import { Plus, Minus, Clock, Users, ShoppingBasket, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { convertIngredients, type UnitSystem } from "@/lib/unitConversion";
 import type { Recipe } from "@shared/schema";
 
 interface RecipeModalProps {
@@ -22,6 +24,7 @@ interface RecipeModalProps {
 
 export function RecipeModal({ recipe, isOpen, onClose }: RecipeModalProps) {
   const [servings, setServings] = useState(recipe.servings);
+  const [unitSystem, setUnitSystem] = useState<UnitSystem>('metric');
   const { toast } = useToast();
 
   const { data: basket = [] } = useQuery({
@@ -76,6 +79,25 @@ export function RecipeModal({ recipe, isOpen, onClose }: RecipeModalProps) {
     return "Hard";
   };
 
+  // Scale and convert ingredients
+  const displayIngredients = recipe.ingredients.map((ingredient) => {
+    // First scale the ingredient
+    const scaledIngredient = ingredient.replace(
+      /(\d+(?:\.\d+)?)/g,
+      (match) => {
+        const multiplier = servings / recipe.servings;
+        const scaled = parseFloat(match) * multiplier;
+        return scaled % 1 === 0
+          ? scaled.toString()
+          : scaled.toFixed(1);
+      }
+    );
+    return scaledIngredient;
+  });
+
+  // Convert to selected unit system
+  const convertedIngredients = convertIngredients(displayIngredients, unitSystem);
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] p-0">
@@ -121,30 +143,29 @@ export function RecipeModal({ recipe, isOpen, onClose }: RecipeModalProps) {
               <Separator />
 
               <div>
-                <h4 className="font-semibold mb-4 text-base">Ingredients</h4>
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-semibold text-base">Ingredients</h4>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">
+                      {unitSystem === 'metric' ? 'ml/kg' : 'cups/lbs'}
+                    </span>
+                    <Switch
+                      checked={unitSystem === 'imperial'}
+                      onCheckedChange={(checked) => setUnitSystem(checked ? 'imperial' : 'metric')}
+                      data-testid="switch-unit-system"
+                    />
+                  </div>
+                </div>
                 <ul className="space-y-2">
-                  {recipe.ingredients.map((ingredient, index) => {
-                    const scaledIngredient = ingredient.replace(
-                      /(\d+(?:\.\d+)?)/g,
-                      (match) => {
-                        const multiplier = servings / recipe.servings;
-                        const scaled = parseFloat(match) * multiplier;
-                        return scaled % 1 === 0
-                          ? scaled.toString()
-                          : scaled.toFixed(1);
-                      }
-                    );
-
-                    return (
-                      <li
-                        key={index}
-                        className="flex items-start gap-2 text-sm text-muted-foreground"
-                      >
-                        <span className="text-primary mt-1">•</span>
-                        <span>{scaledIngredient}</span>
-                      </li>
-                    );
-                  })}
+                  {convertedIngredients.map((ingredient, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                    >
+                      <span className="text-primary mt-1">•</span>
+                      <span>{ingredient}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 

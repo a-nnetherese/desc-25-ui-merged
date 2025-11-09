@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile View Mode Styles */
+.mobile-view .max-w-7xl {
+  max-width: 640px !important;
+}
+
+.mobile-view .md\:grid-cols-2 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.mobile-view .lg\:grid-cols-3 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.mobile-view .md\:flex-row {
+  flex-direction: column !important;
+}
+
+.mobile-view .md\:text-5xl,
+.mobile-view .lg\:text-6xl {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
+}
+
+.mobile-view .md\:py-32 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+.mobile-view .md\:text-3xl,
+.mobile-view .md\:text-4xl {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+}
+
 /* LIGHT MODE */
 :root {
   --button-outline: rgba(0,0,0, .10);

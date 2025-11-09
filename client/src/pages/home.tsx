@@ -229,6 +229,7 @@ export default function Home() {
             onClick={prevBreakfast}
             aria-label="Previous breakfast"
             className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-prev-breakfast"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
@@ -236,10 +237,29 @@ export default function Home() {
             onClick={nextBreakfast}
             aria-label="Next breakfast"
             className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-next-breakfast"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
         </>
+      )}
+      
+      {breakfastChunks.length > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6" data-testid="carousel-dots-breakfast">
+          {breakfastChunks.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setBreakfastPage(index)}
+              aria-label={`Go to breakfast page ${index + 1}`}
+              className={`h-2 rounded-full transition-all ${
+                breakfastPage === index
+                  ? 'w-8 bg-primary'
+                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+              }`}
+              data-testid={`dot-breakfast-${index}`}
+            />
+          ))}
+        </div>
       )}
     </div>
   )}
@@ -298,6 +318,7 @@ export default function Home() {
             onClick={prevLunch}
             aria-label="Previous lunch"
             className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-prev-lunch"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
@@ -305,10 +326,29 @@ export default function Home() {
             onClick={nextLunch}
             aria-label="Next lunch"
             className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-next-lunch"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
         </>
+      )}
+      
+      {lunchChunks.length > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6" data-testid="carousel-dots-lunch">
+          {lunchChunks.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setLunchPage(index)}
+              aria-label={`Go to lunch page ${index + 1}`}
+              className={`h-2 rounded-full transition-all ${
+                lunchPage === index
+                  ? 'w-8 bg-primary'
+                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+              }`}
+              data-testid={`dot-lunch-${index}`}
+            />
+          ))}
+        </div>
       )}
     </div>
   )}
@@ -367,6 +407,7 @@ export default function Home() {
             onClick={prevDinner}
             aria-label="Previous dinner"
             className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-prev-dinner"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
@@ -374,10 +415,29 @@ export default function Home() {
             onClick={nextDinner}
             aria-label="Next dinner"
             className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-next-dinner"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
         </>
+      )}
+      
+      {dinnerChunks.length > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6" data-testid="carousel-dots-dinner">
+          {dinnerChunks.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setDinnerPage(index)}
+              aria-label={`Go to dinner page ${index + 1}`}
+              className={`h-2 rounded-full transition-all ${
+                dinnerPage === index
+                  ? 'w-8 bg-primary'
+                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+              }`}
+              data-testid={`dot-dinner-${index}`}
+            />
+          ))}
+        </div>
       )}
     </div>
   )}
@@ -435,6 +495,7 @@ export default function Home() {
             onClick={prevSnacks}
             aria-label="Previous snacks"
             className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-prev-snacks"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
@@ -442,10 +503,29 @@ export default function Home() {
             onClick={nextSnacks}
             aria-label="Next snacks"
             className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            data-testid="button-next-snacks"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
         </>
+      )}
+      
+      {snacksChunks.length > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6" data-testid="carousel-dots-snacks">
+          {snacksChunks.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setSnacksPage(index)}
+              aria-label={`Go to snacks page ${index + 1}`}
+              className={`h-2 rounded-full transition-all ${
+                snacksPage === index
+                  ? 'w-8 bg-primary'
+                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+              }`}
+              data-testid={`dot-snacks-${index}`}
+            />
+          ))}
+        </div>
       )}
     </div>
   )}
