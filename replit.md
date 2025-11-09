@@ -1,4 +1,4 @@
-# Ecosina - Smart Meal Planning & Grocery Management
+# PantryPal - Smart Meal Planning & Grocery Management
 
 ## Overview
 Ecosina is a meal planning and grocery management application designed specifically for college students living in dorms. The app helps students plan meals efficiently, generate shopping lists automatically, and track their grocery inventory to reduce food waste.
@@ -54,7 +54,7 @@ Ecosina is a meal planning and grocery management application designed specifica
 
 ## Recent Changes
 - Initial project setup (Oct 27, 2025)
-- Implemented green and pink color scheme matching Ecosina branding
+- Implemented green and pink color scheme matching PantryPal branding
 - Built all frontend components with exceptional visual quality
 - Created smooth scroll functionality from hero to recipe sections
 - Designed expandable recipe modal with ingredient scaling
