@@ -91,7 +91,7 @@ export default function Home() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <header className="mb-12 flex items-center justify-center">
-          <h1 className="text-5xl md:text-5xl font-bold mb-2 tracking-tight drop-shadow-sm flex items-center gap-2">
+          <h1 className="text-5xl md:text-2xl font-bold mb-2 tracking-tight drop-shadow-sm flex items-center gap-2">
                     Pantry<span className="text-secondary">Pal</span>
                   </h1>
         </header>
@@ -133,7 +133,7 @@ export default function Home() {
               <img
                 src={Clipboard3D}
                 alt="Checklist illustration"
-                className="h-64 w-64 opacity-100 object-contain"
+                className="h-80 w-80 opacity-100 object-contain"
                 draggable={false}
               />
             </div>
