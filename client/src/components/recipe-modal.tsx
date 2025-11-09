@@ -1,18 +1,26 @@
 import { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Plus, Minus, Clock, Users, ShoppingBasket, Trash2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import type { Recipe } from "@shared/schema";
+import { useMutation, useQuery } from "@tantml:invoke>
+<parameter name="task">I'm working on enhancing a recipe/grocery list app with several features:
+1. Better image scanning using Google Vision API (done)
+2. Unit conversion between metric (ml/kg) and imperial (cups/tbsp) 
+3. Ingredient deduplication when adding to grocery list (eggs vs egg, rice vs cooked rice)
+4. Category-based sorting in grocery list
+5. Mobile responsive toggle
+6. Carousel dots for recipe sections
+7. Fix manual input button (needs investigation)
+
+Current data model issues:
+- Recipes store ingredients as simple string arrays: ["2 cups flour", "100g beef"]
+- This makes robust unit conversion, deduplication, and category assignment challenging
+- Currently using in-memory storage (MemStorage) - data is lost on restart
+
+Questions:
+1. Should I migrate to the PostgreSQL database now (user has one available)?
+2. For ingredients, should I restructure to use objects with quantity/unit/name properties, or keep strings and parse them?
+3. For ingredient deduplication and category assignment, should this be done client-side with normalization functions, or should the schema be enhanced?
+4. What's the best approach for the unit conversion toggle - client-side conversion or store both systems?
+
+Please provide architectural guidance on the best approach that balances functionality with simplicity.
 
 interface RecipeModalProps {
   recipe: Recipe;
