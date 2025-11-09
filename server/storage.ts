@@ -150,17 +150,6 @@ export class MemStorage implements IStorage {
         instructions: ["Drain tuna and mix with mayo, calamansi, salt, and pepper.", "Spread between bread slices or on toasted bread."],
       },
       {
-        name: "Lugaw + Boiled Egg",
-        category: "breakfast",
-        description: "Comforting, budget-friendly rice porridge topped with a simple egg.",
-        difficulty: 2,
-        prepTime: 25,
-        servings: 2,
-        imageUrl: "https://www.foxyfolksy.com/wp-content/uploads/2024/09/lugaw-recipe-1200t.jpg",
-        ingredients: ["½ cup uncooked rice", "2½ cups water", "1 egg", "Salt", "Pepper", "ginger", "garlic", "patis"],
-        instructions: ["Combine rice, water, salt, and optional seasonings in rice cooker.", "Cook until rice breaks down and thickens (20–30 mins).", "Serve with sliced boiled egg."],
-      },
-      {
         name: "Egg & Tomato Rice Bowl",
         category: "breakfast",
         description: "A quick, savory stir of eggs and tomatoes over hot rice.",
@@ -442,17 +431,6 @@ export class MemStorage implements IStorage {
         instructions: ["Sauté garlic until fragrant.", "Add pechay and soy sauce, toss until wilted.", "Serve with rice."]
       },
       {
-        name: "Sautéed Corned Tuna + Rice (Homemade Version)",
-        category: "dinner",
-        description: "Homemade corned tuna sautéed with garlic and onion.",
-        difficulty: 2,
-        prepTime: 12,
-        servings: 1,
-        imageUrl: "https://www.pureandsimplenourishment.com/wp-content/uploads/2022/08/tuna-fried-rice-feature-image.jpg",
-        ingredients: ["1 small can tuna (flakes in oil)", "1 clove garlic, minced", "¼ onion, chopped", "1 tsp soy sauce", "Rice"],
-        instructions: ["Drain some oil, then sauté garlic and onion.", "Add tuna and soy sauce, cook until slightly crisp.", "Serve with rice."]
-      },
-      {
         name: "Garlic Butter Rice + Egg + Fried Hotdog",
         category: "dinner",
         description: "Comforting combo of garlic butter rice, egg, and fried hotdog.",
@@ -473,17 +451,6 @@ export class MemStorage implements IStorage {
         imageUrl: "https://www.eatwell101.com/wp-content/uploads/2022/09/Pepper-Chicken-Stir-Fry-recipe.jpg",
         ingredients: ["150g chicken, sliced", "¼ cup bell peppers, sliced", "1 tbsp soy sauce", "1 tsp sugar", "1 tsp calamansi juice"],
         instructions: ["Cook chicken until slightly browned.", "Add bell peppers and sauce mixture.", "Stir-fry until glossy and fragrant."]
-      },
-      {
-        name: "Egg Rice Bowl",
-        category: "dinner",
-        description: "Simple rice bowl topped with buttery egg and soy sauce.",
-        difficulty: 2,
-        prepTime: 10,
-        servings: 1,
-        imageUrl: "https://www.okonomikitchen.com/wp-content/uploads/2020/09/vegan-eggy-Japanese-scrambled-tofu-1-of-1-2.jpg",
-        ingredients: ["1 cup rice", "1 egg", "1 tsp soy sauce", "1 tsp butter"],
-        instructions: ["Melt butter into rice.", "Fry or scramble egg, then place on top.", "Drizzle soy sauce and mix before eating."]
       },
       {
         name: "Vegetable Fried Rice (Leftover Veggies + Egg)",
@@ -554,17 +521,6 @@ export class MemStorage implements IStorage {
       instructions: ["Mash boiled egg with mayo, salt, and pepper.", "Spread on bread and close sandwich.", "Toast lightly if desired."]
     },
     {
-      name: "Microwave Corn Butter Cup",
-      category: "snacks",
-      description: "Sweet and buttery corn cup, ready in just a couple minutes.",
-      difficulty: 1,
-      prepTime: 5,
-      servings: 1,
-      imageUrl: "https://noobcook.com/wp-content/uploads/2009/06/3640353564_3a40a33677_o.jpg",
-      ingredients: ["½ cup canned or frozen corn", "1 tsp butter", "Salt", "Optional: 1 tbsp grated cheese"],
-      instructions: ["Combine corn, butter, and salt in a microwave-safe cup.", "Microwave for 1–2 minutes.", "Mix well and top with cheese if desired."]
-    },
-    {
       name: "Cheesy Instant Fries",
       category: "snacks",
       description: "Quick cheesy fries drizzled with mayo, ready in minutes.",
@@ -585,17 +541,6 @@ export class MemStorage implements IStorage {
       imageUrl: "https://images.yummy.ph/yummy/uploads/2017/01/grilled-cheese-corned-beef-6-500x360.jpg",
       ingredients: ["1 slice bread", "2 tbsp canned corned beef", "2 tbsp grated cheese"],
       instructions: ["Spread corned beef evenly on bread.", "Top with cheese.", "Microwave for 1 minute until heated and cheese melts."]
-    },
-    {
-      name: "Tuna or Chicken Rice Bowl (snacks-Size)",
-      category: "snacks",
-      description: "Small rice bowl topped with tuna or chicken for a quick snacks.",
-      difficulty: 2,
-      prepTime: 5,
-      servings: 1,
-      imageUrl: "https://www.simplyrecipes.com/thmb/uOOGnoA0Vmzbk3mOtJK6eYOOgu4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/simply-recipes-spicy-tuna-rice-bowl-lead-1-cc5960e3dd6241479c2d36f57a7b3e14.jpg",
-      ingredients: ["½ cup cooked rice", "2 tbsp canned tuna or shredded cooked chicken", "1 tsp soy sauce", "1 tsp mayonnaise"],
-      instructions: ["Combine rice, tuna/chicken, soy sauce, and mayo in a bowl.", "Microwave 30–45 seconds to warm.", "Add egg on top for a heavier snacks."]
     },
     {
       name: "Chocolate Graham Bites",
