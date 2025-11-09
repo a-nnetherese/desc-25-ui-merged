@@ -23,11 +23,11 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
 
   const processImage = async (file: File) => {
     // Check for API key first
-    const apiKey = import.meta.env.VITE_GOOGLE_VISION_API_KEY;
+    const apiKey = import.meta.env.VITE_OCR_API_KEY;
     if (!apiKey) {
       toast({
         title: "Configuration Error",
-        description: "Google Vision API key is not configured. Please contact the administrator.",
+        description: "OCR API key is not configured. Please contact the administrator.",
         variant: "destructive",
       });
       return;
@@ -37,62 +37,40 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
     setStep("processing");
 
     try {
-      // Convert file to base64
-      const reader = new FileReader();
-      const base64Promise = new Promise<string>((resolve, reject) => {
-        reader.onload = () => {
-          const base64 = (reader.result as string).split(',')[1];
-          resolve(base64);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
+      // Create FormData for OCR.space API with enhanced parameters
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("apikey", apiKey);
+      formData.append("language", "eng");
+      formData.append("isOverlayRequired", "false");
+      // OCR Engine 2 is more accurate for structured text and receipts
+      formData.append("OCREngine", "2");
+      // Enable auto-scaling for better accuracy with different image sizes
+      formData.append("scale", "true");
+      // Enable auto-rotation for tilted images
+      formData.append("isTable", "true");
+      // Detect orientation automatically
+      formData.append("detectOrientation", "true");
+
+      const response = await fetch("https://api.ocr.space/parse/image", {
+        method: "POST",
+        body: formData,
       });
-
-      const base64Image = await base64Promise;
-
-      // Call Google Vision API
-      const response = await fetch(
-        `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            requests: [
-              {
-                image: {
-                  content: base64Image,
-                },
-                features: [
-                  {
-                    type: "DOCUMENT_TEXT_DETECTION",
-                    maxResults: 1,
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      );
 
       const result = await response.json();
 
-      if (result.responses && result.responses[0]) {
-        const textAnnotations = result.responses[0].textAnnotations;
-        const fullTextAnnotation = result.responses[0].fullTextAnnotation;
+      if (result.ParsedResults && result.ParsedResults[0]) {
+        const extractedText = result.ParsedResults[0].ParsedText;
         
-        if (!textAnnotations || textAnnotations.length === 0) {
+        // Check if OCR had issues with the image quality
+        if (result.ParsedResults[0].ErrorMessage) {
           toast({
-            title: "No text found",
-            description: "Couldn't detect any text in the image. Try a clearer photo.",
+            title: "Image quality issue",
+            description: "The image quality may be too low. Try a clearer, well-lit photo.",
             variant: "destructive",
           });
           return;
         }
-
-        // Use fullTextAnnotation for better text extraction
-        const extractedText = fullTextAnnotation?.text || textAnnotations[0]?.description || "";
         
         // Parse the extracted text to identify grocery items
         const items = parseGroceryItems(extractedText);
@@ -111,8 +89,6 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
           });
           onOpenChange(false);
         }
-      } else if (result.error) {
-        throw new Error(result.error.message || "Google Vision API error");
       } else {
         throw new Error("No text detected in image");
       }
@@ -120,7 +96,7 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
       console.error("OCR error:", error);
       toast({
         title: "Scanning failed",
-        description: error instanceof Error ? error.message : "Unable to process the image. Please try again.",
+        description: "Unable to process the image. Please try again with a clearer photo.",
         variant: "destructive",
       });
     } finally {
