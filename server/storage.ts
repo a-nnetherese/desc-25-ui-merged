@@ -69,7 +69,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://scontent.fcrk3-1.fna.fbcdn.net/v/t39.30808-6/477449905_1060733536099101_5259720973362463121_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=H8KX1Aug22oQ7kNvwEGWZHc&_nc_oc=Adlo0ueXikllLrkpKd4tbO8TZMPG608YBLCjsoNaXgimesplEnaCWKyvgNgWOW7fYvJR9wYFu0zxs3O5RM8y3az1&_nc_zt=23&_nc_ht=scontent.fcrk3-1.fna&_nc_gid=i_Uvdz2lCDW7YW1plTUv5g&oh=00_Afh6fz_DM677IZyyVUuLmI2Ry5qN3cJSrnlEwhWFyT34hQ&oe=69153B45",
-        ingredients: ["2 cups cooked rice", "2 eggs", "2 hotdogs", "2 tbsp soy sauce", "1 tbsp vegetable oil", "1/2 cup mixed vegetables", "2 cloves garlic, minced", "Salt and pepper to taste"],
+        ingredients: ["2 cups cooked rice", "2 eggs", "2 hotdogs", "2 tbsp soy sauce", "1 tbsp vegetable oil", "1/2 cup mixed vegetables", "2 cloves garlic, minced", "Salt", "Pepper"],
         instructions: ["Heat oil in a pan over medium heat", "Add minced garlic and sauté until golden", "Slice hotdogs and add to pan, cook until slightly browned", "Add mixed vegetables and stir-fry for 2 minutes", "Add cooked rice and soy sauce, mix well and break up clumps", "Push rice to the side and crack eggs into the pan", "Fry eggs sunnyside-up until whites are set", "Season with salt and pepper, serve hot"],
       },
       {
@@ -80,7 +80,7 @@ export class MemStorage implements IStorage {
         prepTime: 25,
         servings: 2,
         imageUrl: "https://www.recipeshare.app/imagesFood/chef-rv-beef-tapa-tapsilog.jpg",
-        ingredients: ["300g beef sirloin, thinly sliced", "3 tbsp soy sauce", "2 tbsp vinegar", "3 cloves garlic, minced", "2 cups cooked rice", "2 eggs", "2 tbsp cooking oil", "Black pepper to taste"],
+        ingredients: ["300g beef sirloin, thinly sliced", "3 tbsp soy sauce", "2 tbsp vinegar", "3 cloves garlic, minced", "2 cups cooked rice", "2 eggs", "2 tbsp cooking oil", "Pepper"],
         instructions: ["Marinate beef in soy sauce, vinegar, garlic, and black pepper for at least 15 minutes", "Heat 1 tbsp oil in a pan and fry marinated beef until cooked through, set aside", "In the same pan, add remaining oil and minced garlic", "Add rice and stir-fry until heated and slightly crispy", "In a separate pan, fry eggs sunnyside-up", "Serve beef tapa with garlic rice and eggs"],
       },
       {
@@ -102,7 +102,7 @@ export class MemStorage implements IStorage {
         prepTime: 20,
         servings: 4,
         imageUrl: "https://maeservesyoufood.com/wp-content/uploads/2023/03/tortang-talong-recipe.jpeg",
-        ingredients: ["1 medium eggplant", "1 egg", "Salt & oil"],
+        ingredients: ["1 medium eggplant", "1 egg", "Salt", "Oil"],
         instructions: ["Grill or microwave eggplant until soft, peel off skin.", "Flatten with fork and dip in beaten egg.", "Fry both sides in pan until golden.", "Serve with rice and ketchup."],
       },
       {
@@ -146,7 +146,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://thebaikery.com/cdn/shop/products/IMG_4772_1296x.jpg?v=1625035386",
-        ingredients: ["1 small canned tuna (in oil or water)", "1 tbsp mayonnaise", "A few drops calamansi or lemon", "Salt & pepper", "2 slices bread"],
+        ingredients: ["1 small canned tuna (in oil or water)", "1 tbsp mayonnaise", "A few drops calamansi or lemon", "Salt", "Pepper", "2 slices bread"],
         instructions: ["Drain tuna and mix with mayo, calamansi, salt, and pepper.", "Spread between bread slices or on toasted bread."],
       },
       {
@@ -157,7 +157,7 @@ export class MemStorage implements IStorage {
         prepTime: 25,
         servings: 2,
         imageUrl: "https://www.foxyfolksy.com/wp-content/uploads/2024/09/lugaw-recipe-1200t.jpg",
-        ingredients: ["½ cup uncooked rice", "2½ cups water", "1 boiled egg", "Salt and pepper", "Optional: ginger, garlic, patis"],
+        ingredients: ["½ cup uncooked rice", "2½ cups water", "1 egg", "Salt", "Pepper", "ginger", "garlic", "patis"],
         instructions: ["Combine rice, water, salt, and optional seasonings in rice cooker.", "Cook until rice breaks down and thickens (20–30 mins).", "Serve with sliced boiled egg."],
       },
       {
@@ -168,7 +168,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://tiffycooks.com/wp-content/uploads/2023/10/6BA1AFB2-DA47-4E61-8E78-5199CF0EBA76-768x1024.jpg",
-        ingredients: ["1 tomato, chopped", "1 egg", "1 tsp oil", "1 cup rice", "Salt & pepper"],
+        ingredients: ["1 tomato, chopped", "1 egg", "1 tsp oil", "1 cup rice", "Salt", "Pepper"],
         instructions: ["Heat oil in a pan or rice cooker and sauté tomato until soft.", "Add beaten egg and scramble with tomato.", "Pour over rice and season to taste."]
       },
 
@@ -181,7 +181,7 @@ export class MemStorage implements IStorage {
         prepTime: 30,
         servings: 4,
         imageUrl: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/1/03/fn_new_filipino_chicken_adobo_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1672867315356.webp",
-        ingredients: ["150g chicken (any cut)", "1 tbsp soy sauce", "1 tbsp vinegar", "2 cloves garlic, minced", "¼ cup water", "Salt, pepper, and oil"],
+        ingredients: ["150g chicken (any cut)", "1 tbsp soy sauce", "1 tbsp vinegar", "2 cloves garlic, minced", "¼ cup water", "Salt", "Pepper", "Oil"],
         instructions: ["Sauté garlic in oil until golden.", "Add chicken, soy sauce, vinegar, water, and pepper.", "Simmer covered for 15–20 mins until chicken is cooked and sauce thickens.", "Serve with rice."],
       },
       {
@@ -192,7 +192,7 @@ export class MemStorage implements IStorage {
         prepTime: 25,
         servings: 2,
         imageUrl: "https://i1.wp.com/mariasmixingbowl.com/wp-content/uploads/2025/04/garlic-butter-chicken-and-rice-1.jpg",
-        ingredients: ["150g chicken breast or thigh, cut small", "1 tbsp butter", "2 cloves garlic, minced", "Salt and pepper"],
+        ingredients: ["150g chicken breast or thigh, cut small", "1 tbsp butter", "2 cloves garlic, minced", "Salt", "Pepper"],
         instructions: ["Melt butter, sauté garlic until fragrant.", "Add chicken, season with salt and pepper, and cook until brown.", "Serve over rice with extra butter drizzle."]
   },
       {
@@ -203,20 +203,9 @@ export class MemStorage implements IStorage {
         prepTime: 30,
         servings: 4,
         imageUrl: "https://www.kawalingpinoy.com/wp-content/uploads/2019/05/filipino-toyomansi-pork-chops-2.jpg",
-        ingredients: ["1 porkchop", "Salt and pepper", "1 tsp soy sauce + ½ tsp calamansi juice for dip"],
+        ingredients: ["1 porkchop", "Salt", "Pepper", "1 tsp soy sauce + ½ tsp calamansi juice for dip"],
         instructions: ["Season porkchop with salt and pepper.", "Fry or pan-cook until golden and cooked through.", "Serve with rice and toyo-mansi dip."]
           },
-      {
-        name: "Chicken Tinola (Easy Broth)",
-        category: "lunch",
-        description: "A warm, comforting chicken soup with sayote and malunggay.",
-        difficulty: 1,
-        prepTime: 15,
-        servings: 3,
-        imageUrl: "https://cdn.shortpixel.ai/spai2/q_glossy+ret_img+to_auto/www.hungryhuy.com/wp-content/uploads/chicken-tinola-sq.jpg",
-        ingredients: ["150g chicken", "1 cup water", "1 small sayote (or green papaya), sliced", "A few malunggay leaves", "1 slice ginger, 1 clove garlic, ¼ onion"],
-        instructions: ["Sauté garlic, onion, and ginger.", "Add chicken, water, and simmer 15–20 mins.", "Add sayote and cook until soft; add malunggay last.", "Season with salt or fish sauce."]
-        },
       {
         name: "Stir-Fried Vegetables + Rice",
         category: "lunch",
@@ -247,7 +236,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://www.allrecipes.com/thmb/VEO6KuVL7sO4TY91yYkomH_rGxo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/265040-Filipino-Beef-Giniling-ddmfs-4x3-251-1-ab56932dcb8b4fb78bf6c1b56217962b.jpg",
-        ingredients: ["100g ground beef", "¼ cup diced carrots", "¼ cup diced potatoes", "2 tbsp tomato sauce", "1 clove garlic", "¼ onion", "Salt & pepper"],
+        ingredients: ["100g ground beef", "¼ cup diced carrots", "¼ cup diced potatoes", "2 tbsp tomato sauce", "1 clove garlic", "¼ onion", "Salt", "Pepper"],
         instructions: ["Sauté garlic and onion, add beef until browned.", "Add carrots, potatoes, and tomato sauce.", "Simmer 10–15 mins until veggies are soft and sauce thickens."]
         },
       {
@@ -269,7 +258,7 @@ export class MemStorage implements IStorage {
         prepTime: 20,
         servings: 2,
         imageUrl: "https://www.funfoodfrolic.com/wp-content/uploads/2020/03/Tofu-Stir-Fry-Thumbnail.jpg",
-        ingredients: ["3 pcs tofu cubes", "½ cup mixed veggies", "1 tbsp soy sauce", "Garlic & onion"],
+        ingredients: ["3 pcs tofu cubes", "½ cup mixed veggies", "1 tbsp soy sauce", "Garlic", "onion"],
         instructions: ["Fry tofu until golden, set aside.", "Sauté garlic and onion, add veggies, then tofu.", "Season with soy sauce and pepper."]
         },
       
@@ -293,7 +282,7 @@ export class MemStorage implements IStorage {
         prepTime: 25,
         servings: 2,
         imageUrl: "https://www.nestlegoodnes.com/ph/sites/default/files/styles/1_1_768px_width/public/srh_recipes/daf62ae8e9c2ffd5a32165d769f46628.jpg.webp?itok=OnON5UWk",
-        ingredients: ["1 chicken leg or breast", "2 tbsp flour", "Salt and pepper", "Oil for frying"],
+        ingredients: ["1 chicken leg or breast", "2 tbsp flour", "Salt", "Pepper", "Oil for frying"],
         instructions: ["Coat chicken in flour, salt, and pepper.", "Fry until golden and crisp.", "Drain excess oil and serve with rice."]
       },
       {
@@ -315,7 +304,7 @@ export class MemStorage implements IStorage {
         prepTime: 20,
         servings: 2,
         imageUrl: "https://foodandjourneys.net/wp-content/uploads/2025/02/Chicken-Afritada-FTR.jpg",
-        ingredients: ["150g chicken", "2 tbsp tomato sauce", "¼ cup diced potatoes", "¼ cup bell peppers", "Garlic, onion, salt, pepper"],
+        ingredients: ["150g chicken", "2 tbsp tomato sauce", "¼ cup diced potatoes", "¼ cup bell peppers", "Garlic", "Onion", "Salt", "Pepper"],
         instructions: ["Sauté garlic and onion.", "Add chicken and tomato sauce, cook for 15 mins.", "Add potatoes and bell pepper; simmer until tender."]
       },
       {
@@ -326,7 +315,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://www.jocooks.com/wp-content/uploads/2013/07/oyster-sauce-chicken-1-4.jpg",
-        ingredients: ["150g chicken", "½ cup mixed veggies", "1 tbsp soy sauce", "1 tsp oyster sauce", "Garlic, oil"],
+        ingredients: ["150g chicken", "½ cup mixed veggies", "1 tbsp soy sauce", "1 tsp oyster sauce", "Garlic", "Oil"],
         instructions: ["Sauté garlic, add chicken until cooked.", "Add veggies, soy sauce, and oyster sauce.", "Stir-fry 5 mins and serve with rice."]
       },
       {
@@ -337,7 +326,7 @@ export class MemStorage implements IStorage {
         prepTime: 20,
         servings: 2,
         imageUrl: "https://images.cookforyourlife.org/wp-content/uploads/2018/08/Fish-Sticks-Lemon-Mayo-e1641532578923.jpg",
-        ingredients: ["1 small fish fillet (cream dory or tilapia)", "2 tbsp flour", "Salt, pepper, oil", "1 tbsp mayo + ½ tsp calamansi for dip"],
+        ingredients: ["1 small fish fillet (cream dory or tilapia)", "2 tbsp flour", "Salt", "Pepper", "Oil", "1 tbsp mayo", "½ tsp calamansi for dip"],
         instructions: ["Season fish, coat with flour.", "Fry until golden and crisp.", "Serve with dip and rice."]
       },
       {
@@ -348,7 +337,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://www.jocooks.com/wp-content/uploads/2021/09/garlic-butter-shrimp-1-10.jpg",
-        ingredients: ["100g shrimp", "1 tbsp butter", "2 cloves garlic, minced", "Salt, pepper"],
+        ingredients: ["100g shrimp", "1 tbsp butter", "2 cloves garlic, minced", "Salt", "Pepper"],
         instructions: ["Melt butter, sauté garlic.", "Add shrimp and cook until pink.", "Season with salt and pepper, serve with rice."]
       },
    
@@ -361,7 +350,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://www.seriouseats.com/thmb/BJjCEDw9OZe95hpZxmNcD3rJnHo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20230529-SEA-EggFriedRice-AmandaSuarez-hero-c8d95fbf69314b318bc279159f582882.jpg",
-        ingredients: ["1 cup cooked rice", "1 egg", "2 cloves garlic, minced", "1 tsp soy sauce", "1 tbsp oil"],
+        ingredients: ["1 cup cooked rice", "1 egg", "2 cloves garlic, minced", "1 tsp soy sauce", "1 tbsp Oil"],
         instructions: ["Heat oil, sauté garlic until golden.", "Add rice, mix well, and season with soy sauce.", "Push rice aside, scramble egg, then combine everything."]
       },
       {
@@ -376,28 +365,6 @@ export class MemStorage implements IStorage {
         instructions: ["Sauté garlic, onion, and ginger.", "Add chicken, cook 2 mins, then pour water.", "Simmer 15–20 mins; add sayote and greens until tender."]
       },
       {
-        name: "Adobo",
-        category: "dinner",
-        description: "Repurpose your leftover adobo into a hearty evening meal.",
-        difficulty: 1,
-        prepTime: 10,
-        servings: 2,
-        imageUrl: "https://salu-salo.com/wp-content/uploads/2015/04/Pork-Adobo-3.jpg",
-        ingredients: ["Leftover adobo", "Water (optional for reheating)"],
-        instructions: ["Reheat adobo in the pan or rice cooker with a splash of water to keep moist.", "Serve with rice or wrap in lettuce for a lighter meal."]
-      },
-      {
-        name: "Tortang Talong + Rice",
-        category: "dinner",
-        description: "Eggplant omelet served with rice and ketchup or soy sauce.",
-        difficulty: 2,
-        prepTime: 15,
-        servings: 1,
-        imageUrl: "https://maeservesyoufood.com/wp-content/uploads/2023/03/tortang-talong-5.jpeg",
-        ingredients: ["1 eggplant", "1 egg", "Salt & oil"],
-        instructions: ["Roast or microwave eggplant until soft, peel off skin.", "Flatten with fork, dip in beaten egg, fry until golden.", "Serve with rice."]
-      },
-      {
         name: "Vegetable Stir-Fry + Fried Egg",
         category: "dinner",
         description: "Simple veggie stir-fry topped with a fried egg.",
@@ -405,7 +372,7 @@ export class MemStorage implements IStorage {
         prepTime: 12,
         servings: 1,
         imageUrl: "https://i.ytimg.com/vi/85RdLY6-xI0/maxresdefault.jpg",
-        ingredients: ["½ cup chopped cabbage", "¼ cup carrots, sliced", "1 tbsp soy sauce", "1 egg", "Garlic, oil"],
+        ingredients: ["½ cup chopped cabbage", "¼ cup carrots, sliced", "1 tbsp soy sauce", "1 egg", "Garlic", "Oil"],
         instructions: ["Sauté garlic, add vegetables, stir-fry until soft.", "Add soy sauce and toss.", "Fry egg separately and serve on top of rice."]
       },
       {
@@ -416,7 +383,7 @@ export class MemStorage implements IStorage {
         prepTime: 10,
         servings: 1,
         imageUrl: "https://images.squarespace-cdn.com/content/v1/56c61656859fd03ce9b15cfa/1595014580945-3J85HIJPJ9E5SEQ854ST/Adjustments.jpeg",
-        ingredients: ["4 pcs tofu cubes", "1 tbsp soy sauce + ½ tbsp vinegar (dip)", "Garlic (optional), oil"],
+        ingredients: ["4 pcs tofu cubes", "1 tbsp soy sauce + ½ tbsp vinegar (dip)", "Garlic", "Oil"],
         instructions: ["Pan-fry or air-fry tofu until golden.", "Mix soy sauce and vinegar for dip.", "Serve with rice."]
       },
       {
@@ -427,7 +394,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://www.allrecipes.com/thmb/J-O1b6CjwXDhYqReRVrCMmRxfrQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-230818-pork-fried-rice-DDMFS-4x3-ab7afb2bbf4c4d158bd1c3de00c2c553.jpg",
-        ingredients: ["150g chicken or pork", "½ cup mixed veggies", "1 tbsp soy sauce", "1 tsp oyster sauce or sugar", "Garlic, oil"],
+        ingredients: ["150g chicken or pork", "½ cup mixed veggies", "1 tbsp soy sauce", "1 tsp oyster sauce or sugar", "Garlic", "Oil"],
         instructions: ["Sauté garlic, add meat until cooked.", "Add veggies, season, and stir-fry for 5 mins.", "Serve over rice."]
       },
       {
@@ -460,7 +427,7 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://tastephilippines.com/wp-content/uploads/2022/10/fried-milkfish-with-rice-and-vegetables.jpg",
-        ingredients: ["1 small fish (tilapia or bangus slice)", "Salt & pepper", "1 tomato, sliced"],
+        ingredients: ["1 small fish (tilapia or bangus slice)", "Salt", "Pepper", "1 tomato, sliced"],
         instructions: ["Season fish, fry until golden.", "Serve with fresh tomatoes and rice."]
       },
       {
@@ -471,7 +438,7 @@ export class MemStorage implements IStorage {
         prepTime: 10,
         servings: 1,
         imageUrl: "https://lh4.googleusercontent.com/LAb66LYyd_KkEtjz-NCgE0upxiwnEvtQsih6eeLTijOt2ozzLLgxzUjsZ8x0bDZKruZ_Qjw691pxeJBA0VL9nACwJAnX6ioOeeegcqAHc5upIU4gFn4NI6Tsx2Tvq_u3YsmAadvL",
-        ingredients: ["1 cup chopped pechay", "2 cloves garlic, minced", "1 tsp soy sauce", "Oil, salt"],
+        ingredients: ["1 cup chopped pechay", "2 cloves garlic, minced", "1 tsp soy sauce", "Oil", "Salt"],
         instructions: ["Sauté garlic until fragrant.", "Add pechay and soy sauce, toss until wilted.", "Serve with rice."]
       },
       {
@@ -526,11 +493,11 @@ export class MemStorage implements IStorage {
         prepTime: 15,
         servings: 2,
         imageUrl: "https://cdn.loveandlemons.com/wp-content/uploads/2025/02/301_LLBlog_FriedRice_47795.jpg",
-        ingredients: ["1 cup rice", "½ cup chopped leftover veggies", "1 egg", "1 tbsp soy sauce", "Garlic, oil"],
+        ingredients: ["1 cup rice", "½ cup chopped leftover veggies", "1 egg", "1 tbsp soy sauce", "Garlic", "Oil"],
         instructions: ["Sauté garlic, add veggies, then rice.", "Push aside, scramble egg, mix all together.", "Season with soy sauce and serve."]
       },
 
-      // snackss (15 recipes)
+      // snacks (15 recipes)
        {
       name: "Mini Nacho Bowl",
       category: "snacks",
@@ -572,7 +539,7 @@ export class MemStorage implements IStorage {
       prepTime: 5,
       servings: 1,
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2WX7NhvDdwEHBesCt9b9VH6mChiDKlDHXfg&s",
-      ingredients: ["4 tbsp Milo", "3 tbsp all-purpose flour", "3 tbsp milk (or water)", "1 tbsp oil", "1 tsp sugar", "½ tsp baking powder"],
+      ingredients: ["4 tbsp Milo", "3 tbsp all-purpose flour", "3 tbsp milk (or water)", "1 tbsp Oil", "1 tsp sugar", "½ tsp baking powder"],
       instructions: ["Combine all ingredients in a microwave-safe mug; mix until smooth.", "Microwave for 1 minute (add 10–15 seconds if still wet in the center).", "Optional: drizzle with condensed milk or peanut butter before serving."]
     },
     {
@@ -583,8 +550,8 @@ export class MemStorage implements IStorage {
       prepTime: 5,
       servings: 1,
       imageUrl: "https://www.kewpie.com.my/sites/default/files/styles/wide/public/content/recipe/img/2021-08/20200324230119_egg%202.jpg?itok=iZRPuDM1",
-      ingredients: ["1 boiled egg", "1 tbsp mayonnaise", "Salt & pepper to taste", "2 slices bread"],
-      instructions: ["Mash egg with mayo, salt, and pepper.", "Spread on bread and close sandwich.", "Toast lightly if desired."]
+      ingredients: ["1 egg", "1 tbsp mayonnaise", "Salt", "Pepper", "2 slices bread"],
+      instructions: ["Mash boiled egg with mayo, salt, and pepper.", "Spread on bread and close sandwich.", "Toast lightly if desired."]
     },
     {
       name: "Microwave Corn Butter Cup",
@@ -594,7 +561,7 @@ export class MemStorage implements IStorage {
       prepTime: 5,
       servings: 1,
       imageUrl: "https://noobcook.com/wp-content/uploads/2009/06/3640353564_3a40a33677_o.jpg",
-      ingredients: ["½ cup canned or frozen corn", "1 tsp butter", "Pinch of salt", "Optional: 1 tbsp grated cheese"],
+      ingredients: ["½ cup canned or frozen corn", "1 tsp butter", "Salt", "Optional: 1 tbsp grated cheese"],
       instructions: ["Combine corn, butter, and salt in a microwave-safe cup.", "Microwave for 1–2 minutes.", "Mix well and top with cheese if desired."]
     },
     {
@@ -627,7 +594,7 @@ export class MemStorage implements IStorage {
       prepTime: 5,
       servings: 1,
       imageUrl: "https://www.simplyrecipes.com/thmb/uOOGnoA0Vmzbk3mOtJK6eYOOgu4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/simply-recipes-spicy-tuna-rice-bowl-lead-1-cc5960e3dd6241479c2d36f57a7b3e14.jpg",
-      ingredients: ["½ cup cooked rice", "2 tbsp canned tuna or shredded cooked chicken", "1 tsp soy sauce", "1 tsp mayonnaise", "Optional: ½ boiled egg"],
+      ingredients: ["½ cup cooked rice", "2 tbsp canned tuna or shredded cooked chicken", "1 tsp soy sauce", "1 tsp mayonnaise"],
       instructions: ["Combine rice, tuna/chicken, soy sauce, and mayo in a bowl.", "Microwave 30–45 seconds to warm.", "Add egg on top for a heavier snacks."]
     },
     {
@@ -660,7 +627,7 @@ export class MemStorage implements IStorage {
       prepTime: 10,
       servings: 1,
       imageUrl: "https://www.allrecipes.com/thmb/LLudQLmfYVebaH8ycc6dIOzcrh0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/35151-traditional-filipino-lumpia-ddmfs-hero-1x2-0745-d25195def74049598ca7cfa057f9d77e.jpg",
-      ingredients: ["3 tbsp leftover giniling or tuna", "4 small lumpia wrappers", "Optional: 1 tbsp mayo or ketchup for dip"],
+      ingredients: ["3 tbsp leftover giniling or tuna", "4 small lumpia wrappers"],
       instructions: ["Place 1 tbsp filling per wrapper, roll tightly, seal edges with water.", "Air fry for 3–5 minutes or microwave 1–2 minutes (turn halfway).", "Serve with dip."]
     },
     {
