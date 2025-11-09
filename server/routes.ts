@@ -29,7 +29,7 @@ function categorizeIngredient(name: string): GroceryCategory {
     return "Processed";
   }
   
-  return "Processed";
+  return "Others";
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
