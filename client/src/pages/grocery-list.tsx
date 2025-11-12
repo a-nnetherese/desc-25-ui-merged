@@ -260,6 +260,8 @@ export default function Home() {
           setFullListOpen(false);
           setManualInputOpen(true);
         }}
+        unitSystem={unitSystem}
+        onUnitSystemChange={setUnitSystem}
       />
       
       <PhotoScanModal
