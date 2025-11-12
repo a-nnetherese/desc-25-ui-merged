@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Camera, Edit, ClipboardList } from "lucide-react";
+import { Camera, Edit, ClipboardList, Scale } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GreenWaveBackground } from "@/components/GreenWaveBackground";
 import { ManualInputModal } from "@/components/ManualInputModal";
@@ -12,6 +12,7 @@ import { GroceryListItem } from "@/components/GroceryListItem";
 import { type GroceryItem, type GroceryCategory } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { convertIngredient, type UnitSystem } from "@/lib/unitConversion";
 import Clipboard3D from "@/assets/Clipboard.png";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
   const [manualInputOpen, setManualInputOpen] = useState(false);
   const [fullListOpen, setFullListOpen] = useState(false);
   const [scannerOpen, setScannerOpen] = useState(false);
+  const [unitSystem, setUnitSystem] = useState<UnitSystem>('imperial');
 
   const { data: items = [], isLoading } = useQuery<GroceryItem[]>({
     queryKey: ["/api/grocery-list"],
@@ -81,8 +83,19 @@ export default function Home() {
     });
   };
 
-  const displayItems = items.slice(0, 6);
+  const displayItems = items.slice(0, 6).map(item => ({
+    ...item,
+    quantity: convertIngredient(item.quantity, unitSystem)
+  }));
   const hasItems = items.length > 0;
+
+  const toggleUnitSystem = () => {
+    setUnitSystem(prev => prev === 'metric' ? 'imperial' : 'metric');
+    toast({
+      title: "Units changed",
+      description: `Switched to ${unitSystem === 'metric' ? 'Imperial' : 'Metric'} units`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-tertiary relative overflow-x-hidden pb-24">
@@ -90,8 +103,8 @@ export default function Home() {
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
-        <header className="mb-12 flex items-center justify-center">
-          <h1 className="text-5xl md:text-2xl font-bold mb-2 tracking-tight drop-shadow-sm flex items-center gap-2">
+        <header className="mb-8 md:mb-12 flex items-center justify-center">
+          <h1 className="text-2xl md:text-3xl font-bold mb-2 tracking-tight drop-shadow-sm flex items-center gap-2">
                     Pantry<span className="text-secondary">Pal</span>
                   </h1>
         </header>
@@ -99,10 +112,10 @@ export default function Home() {
         {/* Hero Section */}
         <div className="mb-16 flex flex-col md:flex-row items-center md:items-start justify-between gap-8 md:gap-16">
           <div className="flex-1 max-w-lg">
-            <h2 className="text-5xl sm:text-6xl font-bold text-green-900 mb-4 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-green-900 mb-4 leading-tight">
               Let’s Track Your<br />Groceries
             </h2>
-            <p className="text-xl font-regular sm:text-2xl text-green-700 mb-8">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-700 mb-8">
               Track what you need the next time you go out for groceries
             </p>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -133,7 +146,7 @@ export default function Home() {
               <img
                 src={Clipboard3D}
                 alt="Checklist illustration"
-                className="h-80 w-80 opacity-100 object-contain"
+                className="h-48 w-48 sm:h-64 sm:w-64 md:h-80 md:w-80 opacity-100 object-contain"
                 draggable={false}
               />
             </div>
@@ -146,18 +159,30 @@ export default function Home() {
             <div className="w-full h-full bg-green-800 rounded-t-[48px] transform -skew-y-3" style={{minHeight: '480px'}} />
           </div>
           <div className="relative z-10 pt-10 px-4 md:px-16">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-4xl font-bold text-white tracking-tight drop-shadow mt-10">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight drop-shadow mt-10">
                 Track and Mark Your List
               </h3>
-              <Button
-                data-testid="button-see-all"
-                onClick={() => setFullListOpen(true)}
-                variant="ghost"
-                className="text-white hover:text-pink-200/80 font-semibold text-lg underline underline-offset-2"
-              >
-                See all
-              </Button>
+              <div className="flex items-center gap-3 mt-2 sm:mt-10">
+                <Button
+                  onClick={toggleUnitSystem}
+                  variant="secondary"
+                  size="sm"
+                  className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm rounded-full"
+                  data-testid="button-toggle-units"
+                >
+                  <Scale className="h-4 w-4 mr-2" />
+                  {unitSystem === 'metric' ? 'Metric' : 'Imperial'}
+                </Button>
+                <Button
+                  data-testid="button-see-all"
+                  onClick={() => setFullListOpen(true)}
+                  variant="ghost"
+                  className="text-white hover:text-pink-200/80 font-semibold text-sm sm:text-lg underline underline-offset-2"
+                >
+                  See all
+                </Button>
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-8 w-full">
               {/* Action Buttons */}

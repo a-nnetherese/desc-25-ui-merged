@@ -228,7 +228,7 @@ export default function Home() {
           <button
             onClick={prevBreakfast}
             aria-label="Previous breakfast"
-            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute left-0 sm:left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-prev-breakfast"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -236,7 +236,7 @@ export default function Home() {
           <button
             onClick={nextBreakfast}
             aria-label="Next breakfast"
-            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute right-0 sm:right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-next-breakfast"
           >
             <ChevronRight className="h-6 w-6" />
@@ -317,7 +317,7 @@ export default function Home() {
           <button
             onClick={prevLunch}
             aria-label="Previous lunch"
-            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute left-0 sm:left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-prev-lunch"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -325,7 +325,7 @@ export default function Home() {
           <button
             onClick={nextLunch}
             aria-label="Next lunch"
-            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute right-0 sm:right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-next-lunch"
           >
             <ChevronRight className="h-6 w-6" />
@@ -406,7 +406,7 @@ export default function Home() {
           <button
             onClick={prevDinner}
             aria-label="Previous dinner"
-            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute left-0 sm:left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-prev-dinner"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -414,7 +414,7 @@ export default function Home() {
           <button
             onClick={nextDinner}
             aria-label="Next dinner"
-            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute right-0 sm:right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-next-dinner"
           >
             <ChevronRight className="h-6 w-6" />
@@ -494,7 +494,7 @@ export default function Home() {
           <button
             onClick={prevSnacks}
             aria-label="Previous snacks"
-            className="absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute left-0 sm:left-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-prev-snacks"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -502,7 +502,7 @@ export default function Home() {
           <button
             onClick={nextSnacks}
             aria-label="Next snacks"
-            className="absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
+            className="absolute right-0 sm:right-[-2rem] top-1/2 -translate-y-1/2 z-20 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 p-3 transition"
             data-testid="button-next-snacks"
           >
             <ChevronRight className="h-6 w-6" />

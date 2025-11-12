@@ -9,7 +9,7 @@ import {
   type GroceryCategory,
 } from "@shared/schema";
 import { mergeIngredients, normalizeIngredient } from "./ingredientDeduplication";
-import { analyzeGroceryImage, analyzeRecipeImage } from "./lib/tesseract";
+import { analyzeGroceryImage, analyzeRecipeImage } from "./lib/ocr";
 
 function categorizeIngredient(name: string): GroceryCategory {
   const lowerName = name.toLowerCase();

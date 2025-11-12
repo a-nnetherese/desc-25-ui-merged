@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Plus, X, Camera, Upload, Image as ImageIcon, Loader2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { compressImage } from "@/lib/imageCompression";
 
 interface AddRecipeDialogProps {
   isOpen: boolean;
@@ -103,17 +104,23 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64String = reader.result as string;
-          setImageUrl(base64String);
-          setImagePreview(base64String);
-        };
-        reader.readAsDataURL(file);
+        try {
+          // Compress image before setting
+          const compressedImage = await compressImage(file, 1920, 1920, 0.85);
+          setImageUrl(compressedImage);
+          setImagePreview(compressedImage);
+        } catch (error) {
+          console.error("Image compression error:", error);
+          toast({
+            title: "Error",
+            description: "Failed to process image. Please try again.",
+            variant: "destructive",
+          });
+        }
       } else {
         toast({
           title: "Invalid file",

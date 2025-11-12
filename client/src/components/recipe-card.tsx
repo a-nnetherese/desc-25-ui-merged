@@ -138,44 +138,50 @@ export function RecipeCard({ recipe, onClick }: RecipeCardProps) {
             </Badge>
           </div>
           
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 border rounded-full">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <span>Servings: {recipe.servings * quantity}</span>
+              <span className="text-xs">({quantity}x recipe)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 border rounded-full">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="rounded-full"
+                  onClick={decrementQuantity}
+                  disabled={quantity <= 1}
+                  data-testid={`button-decrement-${recipe.id}`}
+                >
+                  <Minus className="h-3 w-3" />
+                </Button>
+                <span className="text-sm font-medium w-6 text-center" data-testid={`text-quantity-${recipe.id}`}>
+                  {quantity}
+                </span>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="rounded-full"
+                  onClick={incrementQuantity}
+                  disabled={quantity >= 10}
+                  data-testid={`button-increment-${recipe.id}`}
+                >
+                  <Plus className="h-3 w-3" />
+                </Button>
+              </div>
+              
               <Button
                 size="sm"
-                variant="ghost"
-                className="rounded-full"
-                onClick={decrementQuantity}
-                disabled={quantity <= 1}
-                data-testid={`button-decrement-${recipe.id}`}
+                variant="default"
+                className="rounded-full flex-1"
+                onClick={handleQuickAdd}
+                disabled={addToBasket.isPending}
+                data-testid={`button-quick-add-${recipe.id}`}
               >
-                <Minus className="h-3 w-3" />
-              </Button>
-              <span className="text-sm font-medium w-6 text-center" data-testid={`text-quantity-${recipe.id}`}>
-                {quantity}
-              </span>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="rounded-full"
-                onClick={incrementQuantity}
-                disabled={quantity >= 10}
-                data-testid={`button-increment-${recipe.id}`}
-              >
-                <Plus className="h-3 w-3" />
+                <ShoppingBasket className="h-4 w-4 mr-1" />
+                {addToBasket.isPending ? "Adding..." : "Add"}
               </Button>
             </div>
-            
-            <Button
-              size="sm"
-              variant="default"
-              className="rounded-full flex-1"
-              onClick={handleQuickAdd}
-              disabled={addToBasket.isPending}
-              data-testid={`button-quick-add-${recipe.id}`}
-            >
-              <ShoppingBasket className="h-4 w-4 mr-1" />
-              {addToBasket.isPending ? "Adding..." : "Add"}
-            </Button>
           </div>
         </div>
       </div>

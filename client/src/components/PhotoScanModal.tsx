@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Camera, Upload, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { compressImage } from "@/lib/imageCompression";
 
 interface PhotoScanModalProps {
   open: boolean;
@@ -26,62 +27,47 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
     setStep("processing");
 
     try {
-      // Convert image to base64
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        try {
-          const base64Image = reader.result as string;
-          
-          // Call our backend API which uses OpenAI Vision
-          const response = await fetch("/api/analyze-grocery-image", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ image: base64Image }),
-          });
+      // Compress and convert image to base64
+      const base64Image = await compressImage(file, 1920, 1920, 0.85);
+      
+      // Call our backend API which uses improved OCR
+      const response = await fetch("/api/analyze-grocery-image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image: base64Image }),
+      });
 
-          if (!response.ok) {
-            throw new Error("Failed to analyze image");
-          }
+      if (!response.ok) {
+        throw new Error("Failed to analyze image");
+      }
 
-          const result = await response.json();
-          const items = result.items || [];
+      const result = await response.json();
+      const items = result.items || [];
 
-          if (items.length === 0) {
-            toast({
-              title: "No items found",
-              description: "We couldn't identify any grocery items in the image. Try a clearer photo.",
-              variant: "destructive",
-            });
-          } else {
-            onItemsDetected(items);
-            toast({
-              title: "Items detected!",
-              description: `Found ${items.length} item${items.length > 1 ? 's' : ''} in the image.`,
-            });
-            onOpenChange(false);
-          }
-        } catch (error) {
-          console.error("Vision API error:", error);
-          toast({
-            title: "Scanning failed",
-            description: "Unable to process the image. Please try again with a clearer photo.",
-            variant: "destructive",
-          });
-        } finally {
-          setIsProcessing(false);
-          setStep("choose");
-        }
-      };
-      reader.readAsDataURL(file);
+      if (items.length === 0) {
+        toast({
+          title: "No items found",
+          description: "We couldn't identify any grocery items in the image. Try a clearer photo.",
+          variant: "destructive",
+        });
+      } else {
+        onItemsDetected(items);
+        toast({
+          title: "Items detected!",
+          description: `Found ${items.length} item${items.length > 1 ? 's' : ''} in the image.`,
+        });
+        onOpenChange(false);
+      }
     } catch (error) {
-      console.error("File reading error:", error);
+      console.error("OCR processing error:", error);
       toast({
-        title: "Error",
-        description: "Unable to read the image file. Please try again.",
+        title: "Scanning failed",
+        description: "Unable to process the image. Please try again with a clearer photo.",
         variant: "destructive",
       });
+    } finally {
       setIsProcessing(false);
       setStep("choose");
     }
