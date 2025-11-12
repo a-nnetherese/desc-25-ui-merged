@@ -22,11 +22,12 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
   const [step, setStep] = useState<"choose" | "processing">("choose");
 
   const processImage = async (file: File) => {
-    const apiKey = import.meta.env.VITE_GOOGLE_VISION_API_KEY;
+    // Check for API key first
+    const apiKey = import.meta.env.VITE_OCR_API_KEY;
     if (!apiKey) {
       toast({
         title: "Configuration Error",
-        description: "Google Vision API key is not configured. Please contact the administrator.",
+        description: "OCR API key is not configured. Please contact the administrator.",
         variant: "destructive",
       });
       return;
@@ -36,68 +37,63 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
     setStep("processing");
 
     try {
-      // Convert image to base64
-      const base64Image = await fileToBase64(file);
-      const imageContent = base64Image.split(',')[1]; // Remove data:image/...;base64, prefix
+      // Create FormData for OCR.space API with enhanced parameters
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("apikey", apiKey);
+      formData.append("language", "eng");
+      formData.append("isOverlayRequired", "false");
+      // OCR Engine 2 is more accurate for structured text and receipts
+      formData.append("OCREngine", "2");
+      // Enable auto-scaling for better accuracy with different image sizes
+      formData.append("scale", "true");
+      // Enable auto-rotation for tilted images
+      formData.append("isTable", "true");
+      // Detect orientation automatically
+      formData.append("detectOrientation", "true");
 
-      // Call Google Cloud Vision API
-      const response = await fetch(
-        `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            requests: [
-              {
-                image: {
-                  content: imageContent,
-                },
-                features: [
-                  {
-                    type: "DOCUMENT_TEXT_DETECTION",
-                    maxResults: 1,
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      );
+      const response = await fetch("https://api.ocr.space/parse/image", {
+        method: "POST",
+        body: formData,
+      });
 
       const result = await response.json();
 
-      if (result.responses && result.responses[0]) {
-        const textAnnotations = result.responses[0].textAnnotations;
-        const fullTextAnnotation = result.responses[0].fullTextAnnotation;
+      if (result.ParsedResults && result.ParsedResults[0]) {
+        const extractedText = result.ParsedResults[0].ParsedText;
+        
+        // Check if OCR had issues with the image quality
+        if (result.ParsedResults[0].ErrorMessage) {
+          toast({
+            title: "Image quality issue",
+            description: "The image quality may be too low. Try a clearer, well-lit photo.",
+            variant: "destructive",
+          });
+          return;
+        }
+        
+        // Parse the extracted text to identify grocery items
+        const items = parseGroceryItems(extractedText);
 
-        if (fullTextAnnotation && fullTextAnnotation.text) {
-          const extractedText = fullTextAnnotation.text;
-          const items = parseGroceryItems(extractedText);
-
-          if (items.length === 0) {
-            toast({
-              title: "No items found",
-              description: "We couldn't identify any grocery items in the image. Try a clearer photo.",
-              variant: "destructive",
-            });
-          } else {
-            onItemsDetected(items);
-            toast({
-              title: "Items detected!",
-              description: `Found ${items.length} item${items.length > 1 ? 's' : ''} in the image.`,
-            });
-            onOpenChange(false);
-          }
+        if (items.length === 0) {
+          toast({
+            title: "No items found",
+            description: "We couldn't identify any grocery items in the image. Try a clearer photo.",
+            variant: "destructive",
+          });
         } else {
-          throw new Error("No text detected in image");
+          onItemsDetected(items);
+          toast({
+            title: "Items detected!",
+            description: `Found ${items.length} item${items.length > 1 ? 's' : ''} in the image.`,
+          });
+          onOpenChange(false);
         }
       } else {
-        throw new Error("Vision API error");
+        throw new Error("No text detected in image");
       }
     } catch (error) {
-      console.error("Vision API error:", error);
+      console.error("OCR error:", error);
       toast({
         title: "Scanning failed",
         description: "Unable to process the image. Please try again with a clearer photo.",
@@ -109,35 +105,34 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
     }
   };
 
-  const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
-  };
-
   const parseGroceryItems = (text: string): Array<{ name: string; category: string; quantity: string }> => {
-    const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    // More aggressive text cleaning for blurry/OCR errors
+    const cleanedText = text
+      .replace(/[|]/g, "I") // Common OCR mistake: | instead of I
+      .replace(/[0O]/g, (match) => match === "O" ? "0" : match) // Distinguish O and 0
+      .replace(/\s+/g, " "); // Normalize whitespace
+
+    const lines = cleanedText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const items: Array<{ name: string; category: string; quantity: string }> = [];
 
+    // Valid schema categories - MUST match exactly
     const validCategories = ["Fruit", "Vegetable", "Meat", "Seafood", "Dairy", "Processed", "Grain"] as const;
 
+    // Enhanced keyword matching with more variations and common misspellings
     const categoryKeywords: Record<string, string[]> = {
-      Fruit: ["apple", "apples", "banana", "bananas", "orange", "oranges", "grape", "grapes", "strawberry", "strawberries", "berry", "berries", "mango", "mangos", "pineapple", "watermelon", "lemon", "lemons", "lime", "limes", "peach", "peaches", "pear", "pears", "cherry", "cherries", "blueberry", "blueberries", "kiwi", "avocado"],
-      Vegetable: ["carrot", "carrots", "tomato", "tomatoes", "lettuce", "cucumber", "cucumbers", "onion", "onions", "garlic", "potato", "potatoes", "cabbage", "spinach", "broccoli", "pepper", "peppers", "celery", "corn", "peas", "beans", "zucchini", "eggplant", "mushroom", "mushrooms"],
-      Meat: ["chicken", "beef", "pork", "bacon", "ham", "sausage", "steak", "turkey", "lamb", "ground", "breast", "thigh", "wing", "ribs"],
-      Seafood: ["fish", "salmon", "tuna", "shrimp", "crab", "lobster", "tilapia", "cod", "seafood", "prawn", "prawns"],
-      Dairy: ["milk", "cheese", "butter", "yogurt", "yoghurt", "cream", "egg", "eggs", "dairy", "cheddar", "mozzarella"],
-      Grain: ["rice", "bread", "pasta", "flour", "oats", "cereal", "wheat", "tortilla", "bagel", "roll", "noodle", "noodles", "quinoa"],
-      Processed: ["chips", "chip", "cookie", "cookies", "candy", "soda", "pop", "sauce", "oil", "vinegar", "salt", "sugar", "ketchup", "mustard", "mayo", "mayonnaise", "dressing", "soy sauce", "pepper"],
+      Fruit: ["apple", "apples", "banana", "bananas", "orange", "oranges", "grape", "grapes", "strawberry", "strawberries", "berry", "berries", "mango", "mangos", "pineapple", "watermelon", "lemon", "lemons", "lime", "limes", "peach", "peaches", "pear", "pears", "cherry", "cherries", "blueberry", "blueberries"],
+      Vegetable: ["carrot", "carrots", "tomato", "tomatoes", "lettuce", "cucumber", "cucumbers", "onion", "onions", "garlic", "potato", "potatoes", "cabbage", "spinach", "broccoli", "pepper", "peppers", "celery", "corn", "peas", "beans", "zucchini"],
+      Meat: ["chicken", "beef", "pork", "bacon", "ham", "sausage", "steak", "turkey", "lamb", "ground", "breast"],
+      Seafood: ["fish", "salmon", "tuna", "shrimp", "crab", "lobster", "tilapia", "cod", "seafood"],
+      Dairy: ["milk", "cheese", "butter", "yogurt", "cream", "egg", "eggs", "dairy"],
+      Grain: ["rice", "bread", "pasta", "flour", "oats", "cereal", "wheat", "tortilla", "bagel", "roll"],
+      Processed: ["chips", "chip", "cookie", "cookies", "candy", "soda", "pop", "sauce", "oil", "vinegar", "salt", "sugar", "ketchup", "mustard", "mayo", "mayonnaise", "dressing"],
     };
 
     for (const line of lines) {
       const lowerLine = line.toLowerCase();
       
-      // Skip non-item lines
+      // Enhanced skip logic - more patterns for non-item lines
       if (
         lowerLine.includes("total") ||
         lowerLine.includes("subtotal") ||
@@ -147,34 +142,35 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
         lowerLine.includes("change") ||
         lowerLine.includes("payment") ||
         lowerLine.includes("card") ||
-        lowerLine.match(/^\d+\/\d+\/\d+/) ||
-        lowerLine.match(/^\d+:\d+/) ||
-        lowerLine.match(/^\$?\d+\.?\d*$/) ||
+        lowerLine.match(/^\d+\/\d+\/\d+/) || // dates
+        lowerLine.match(/^\d+:\d+/) || // times
+        lowerLine.match(/^\$?\d+\.?\d*$/) || // just prices
         lowerLine.match(/^balance/i) ||
-        line.length < 2
+        line.length < 2 // Allow 2-char minimum for items like "ox" (oxtail)
       ) {
         continue;
       }
 
-      // Extract quantity
+      // Enhanced quantity extraction - handle more formats
+      // Matches: "2x", "2 x", "x2", "qty 2", "2 bananas", etc.
       const quantityMatch = line.match(/(?:^|\s)(\d+)\s*(?:x|qty)?(?:\s|$)/i) || 
                            line.match(/(?:x|qty)\s*(\d+)/i);
       const quantity = quantityMatch ? quantityMatch[1] : "1";
 
-      // Clean item name
+      // Enhanced item name cleaning with better pattern recognition
       let itemName = line
-        .replace(/^\d+\s*x?\s*/i, "")
-        .replace(/\s*x?\d+\s*$/i, "")
-        .replace(/\$?\d+\.?\d*\s*$/g, "")
-        .replace(/\$\d+\.?\d*/g, "")
-        .replace(/[^a-zA-Z\s'-]/g, "")
-        .replace(/\s+/g, " ")
+        .replace(/^\d+\s*x?\s*/i, "") // remove leading quantities
+        .replace(/\s*x?\d+\s*$/i, "") // remove trailing quantities
+        .replace(/\$?\d+\.?\d*\s*$/g, "") // remove trailing prices
+        .replace(/\$\d+\.?\d*/g, "") // remove inline prices
+        .replace(/[^a-zA-Z\s'-]/g, "") // keep letters, spaces, hyphens, apostrophes
+        .replace(/\s+/g, " ") // normalize spaces
         .trim();
 
       if (itemName.length < 2) continue;
 
-      // Determine category
-      let category: string = "Processed";
+      // Determine category based on keywords - ALWAYS use a valid category
+      let category: string = "Processed"; // safe default
       for (const [cat, keywords] of Object.entries(categoryKeywords)) {
         if (keywords.some(keyword => lowerLine.includes(keyword))) {
           category = cat;
@@ -182,6 +178,7 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
         }
       }
 
+      // Ensure category is valid before adding
       if (!validCategories.includes(category as any)) {
         category = "Processed";
       }
@@ -276,7 +273,7 @@ export function PhotoScanModal({ open, onOpenChange, onItemsDetected }: PhotoSca
             <Loader2 className="h-12 w-12 animate-spin text-primary" />
             <p className="text-lg font-medium">Scanning image...</p>
             <p className="text-sm text-muted-foreground text-center">
-              Using Google Vision AI to extract grocery items
+              Extracting grocery items from your photo
             </p>
           </div>
         )}
