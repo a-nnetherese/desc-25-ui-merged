@@ -9,7 +9,7 @@ import {
   type GroceryCategory,
 } from "@shared/schema";
 import { mergeIngredients, normalizeIngredient } from "./ingredientDeduplication";
-import { analyzeGroceryImage, analyzeRecipeImage } from "./lib/openai";
+import { analyzeGroceryImage, analyzeRecipeImage } from "./lib/tesseract";
 
 function categorizeIngredient(name: string): GroceryCategory {
   const lowerName = name.toLowerCase();
@@ -30,7 +30,7 @@ function categorizeIngredient(name: string): GroceryCategory {
     return "Processed";
   }
   
-  return "Others";
+  return "Processed";
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {

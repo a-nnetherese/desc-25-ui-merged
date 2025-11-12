@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, List, Grid3x3 } from "lucide-react";
 import { GroceryListItem } from "./GroceryListItem";
 import type { GroceryItem, GroceryCategory } from "@shared/schema";
+import { convertIngredient, type UnitSystem } from "@/lib/unitConversion";
 
 interface FullListModalProps {
   open: boolean;
@@ -18,9 +19,16 @@ type ViewMode = 'list' | 'category';
 
 export function FullListModal({ open, onOpenChange, items, onToggleItem, onDeleteItem, onAddNew }: FullListModalProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [unitSystem, setUnitSystem] = useState<UnitSystem>('metric');
+  
+  // Convert item quantities based on unit system
+  const convertedItems = items.map(item => ({
+    ...item,
+    quantity: convertIngredient(item.quantity, unitSystem)
+  }));
   
   // Group items by category
-  const itemsByCategory = items.reduce((acc, item) => {
+  const itemsByCategory = convertedItems.reduce((acc, item) => {
     const category = item.category as GroceryCategory;
     if (!acc[category]) {
       acc[category] = [];
@@ -34,42 +42,69 @@ export function FullListModal({ open, onOpenChange, items, onToggleItem, onDelet
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-white border-2 border-green-dark rounded-2xl max-w-2xl max-h-[80vh] overflow-hidden flex flex-col p-0">
-        <DialogHeader className="px-8 py-6 border-b-2 border-green-dark flex flex-row items-center justify-between gap-4">
-          <DialogTitle className="text-3xl font-bold text-green-dark">
-            Your Grocery List
-          </DialogTitle>
+        <DialogHeader className="px-8 py-6 border-b-2 border-green-dark flex flex-col gap-4">
+          <div className="flex flex-row items-center justify-between gap-4">
+            <DialogTitle className="text-3xl font-bold text-green-dark">
+              Your Grocery List
+            </DialogTitle>
+            <div className="flex items-center gap-2">
+              <Button
+                data-testid="button-view-list"
+                onClick={() => setViewMode('list')}
+                size="icon"
+                variant={viewMode === 'list' ? 'default' : 'outline'}
+                className="rounded-full"
+              >
+                <List className="w-5 h-5" />
+              </Button>
+              <Button
+                data-testid="button-view-category"
+                onClick={() => setViewMode('category')}
+                size="icon"
+                variant={viewMode === 'category' ? 'default' : 'outline'}
+                className="rounded-full"
+              >
+                <Grid3x3 className="w-5 h-5" />
+              </Button>
+              <Button
+                data-testid="button-add-new-full-list"
+                onClick={onAddNew}
+                size="icon"
+                variant="default"
+                className="rounded-full"
+              >
+                <Plus className="w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+          
           <div className="flex items-center gap-2">
-            <Button
-              data-testid="button-view-list"
-              onClick={() => setViewMode('list')}
-              size="icon"
-              variant={viewMode === 'list' ? 'default' : 'outline'}
-              className="h-10 w-10 rounded-full"
-            >
-              <List className="w-5 h-5" />
-            </Button>
-            <Button
-              data-testid="button-view-category"
-              onClick={() => setViewMode('category')}
-              size="icon"
-              variant={viewMode === 'category' ? 'default' : 'outline'}
-              className="h-10 w-10 rounded-full"
-            >
-              <Grid3x3 className="w-5 h-5" />
-            </Button>
-            <Button
-              data-testid="button-add-new-full-list"
-              onClick={onAddNew}
-              size="icon"
-              className="h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
-            >
-              <Plus className="w-5 h-5" />
-            </Button>
+            <span className="text-sm text-muted-foreground">Units:</span>
+            <div className="flex gap-1 bg-muted p-1 rounded-full">
+              <Button
+                data-testid="button-unit-metric"
+                onClick={() => setUnitSystem('metric')}
+                size="sm"
+                variant={unitSystem === 'metric' ? 'default' : 'ghost'}
+                className="rounded-full text-xs"
+              >
+                Metric (ml, g)
+              </Button>
+              <Button
+                data-testid="button-unit-imperial"
+                onClick={() => setUnitSystem('imperial')}
+                size="sm"
+                variant={unitSystem === 'imperial' ? 'default' : 'ghost'}
+                className="rounded-full text-xs"
+              >
+                Imperial (cups, oz)
+              </Button>
+            </div>
           </div>
         </DialogHeader>
         
         <div className="flex-1 overflow-y-auto px-8 py-6">
-          {items.length === 0 ? (
+          {convertedItems.length === 0 ? (
             <div className="text-center py-12">
               <p data-testid="text-empty-list" className="text-lg text-muted-foreground">
                 Your grocery list is empty. Add items using Scan or Self Input!
@@ -77,7 +112,7 @@ export function FullListModal({ open, onOpenChange, items, onToggleItem, onDelet
             </div>
           ) : viewMode === 'list' ? (
             <div className="space-y-3">
-              {items.map((item) => (
+              {convertedItems.map((item) => (
                 <GroceryListItem
                   key={item.id}
                   item={item}
