@@ -13,13 +13,18 @@ interface FullListModalProps {
   onToggleItem: (id: string) => void;
   onDeleteItem?: (id: string) => void;
   onAddNew: () => void;
+  unitSystem?: UnitSystem;
+  onUnitSystemChange?: (system: UnitSystem) => void;
 }
 
 type ViewMode = 'list' | 'category';
 
-export function FullListModal({ open, onOpenChange, items, onToggleItem, onDeleteItem, onAddNew }: FullListModalProps) {
+export function FullListModal({ open, onOpenChange, items, onToggleItem, onDeleteItem, onAddNew, unitSystem: externalUnitSystem, onUnitSystemChange }: FullListModalProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
-  const [unitSystem, setUnitSystem] = useState<UnitSystem>('metric');
+  const [internalUnitSystem, setInternalUnitSystem] = useState<UnitSystem>('imperial');
+  
+  const unitSystem = externalUnitSystem ?? internalUnitSystem;
+  const setUnitSystem = onUnitSystemChange ?? setInternalUnitSystem;
   
   // Convert item quantities based on unit system
   const convertedItems = items.map(item => ({
