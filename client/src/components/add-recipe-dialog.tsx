@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Plus, X, Camera, Upload, Image as ImageIcon } from "lucide-react";
+import { Plus, X, Camera, Upload, Image as ImageIcon, Loader2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
@@ -101,6 +101,8 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
     // Don't reset category here since it should keep the defaultCategory value set by useEffect
   };
 
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -119,6 +121,60 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
           variant: "destructive",
         });
       }
+    }
+  };
+
+  const analyzeRecipeImage = async () => {
+    if (!imageUrl) return;
+
+    setIsAnalyzing(true);
+    try {
+      const response = await fetch("/api/analyze-recipe-image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image: imageUrl }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to analyze recipe");
+      }
+
+      const recipe = await response.json();
+
+      // Auto-fill the form with analyzed data
+      if (recipe.name) setName(recipe.name);
+      if (recipe.description) setDescription(recipe.description);
+      if (recipe.prepTime) setPrepTime(recipe.prepTime.toString());
+      if (recipe.servings) setServings(recipe.servings.toString());
+      if (recipe.difficulty) setDifficulty(recipe.difficulty.toString());
+      if (recipe.category) {
+        const categoryLower = recipe.category.toLowerCase();
+        if (["breakfast", "lunch", "dinner", "snacks"].includes(categoryLower)) {
+          setCategory(categoryLower);
+        }
+      }
+      if (recipe.ingredients && recipe.ingredients.length > 0) {
+        setIngredients(recipe.ingredients);
+      }
+      if (recipe.instructions && recipe.instructions.length > 0) {
+        setInstructions(recipe.instructions);
+      }
+
+      toast({
+        title: "Recipe analyzed!",
+        description: "The form has been filled with recipe details from the image.",
+      });
+    } catch (error) {
+      console.error("Recipe analysis error:", error);
+      toast({
+        title: "Analysis failed",
+        description: "Unable to analyze the recipe image. Please fill in the details manually.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsAnalyzing(false);
     }
   };
 
@@ -264,16 +320,36 @@ export function AddRecipeDialog({ isOpen, onClose, defaultCategory }: AddRecipeD
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={removeImage}
-                  className="w-full"
-                  data-testid="button-remove-image"
-                >
-                  <X className="mr-2 h-4 w-4" />
-                  Remove Image
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="default"
+                    onClick={analyzeRecipeImage}
+                    disabled={isAnalyzing}
+                    className="flex-1"
+                    data-testid="button-analyze-recipe"
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Auto-fill from Image
+                      </>
+                    )}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={removeImage}
+                    data-testid="button-remove-image"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             ) : (
               <div className="flex flex-col gap-2">

@@ -9,6 +9,7 @@ import {
   type GroceryCategory,
 } from "@shared/schema";
 import { mergeIngredients, normalizeIngredient } from "./ingredientDeduplication";
+import { analyzeGroceryImage, analyzeRecipeImage } from "./lib/openai";
 
 function categorizeIngredient(name: string): GroceryCategory {
   const lowerName = name.toLowerCase();
@@ -190,6 +191,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(404).json({ error: "Item not found" });
     }
     res.json({ success: true });
+  });
+
+  // Vision API endpoints
+  app.post("/api/analyze-grocery-image", async (req, res) => {
+    try {
+      const { image } = req.body;
+      if (!image) {
+        return res.status(400).json({ error: "No image provided" });
+      }
+
+      // Remove data URL prefix if present
+      const base64Image = image.replace(/^data:image\/[a-z]+;base64,/, "");
+      
+      const items = await analyzeGroceryImage(base64Image);
+      res.json({ items });
+    } catch (error) {
+      console.error("Error analyzing grocery image:", error);
+      res.status(500).json({ error: "Failed to analyze image" });
+    }
+  });
+
+  app.post("/api/analyze-recipe-image", async (req, res) => {
+    try {
+      const { image } = req.body;
+      if (!image) {
+        return res.status(400).json({ error: "No image provided" });
+      }
+
+      // Remove data URL prefix if present
+      const base64Image = image.replace(/^data:image\/[a-z]+;base64,/, "");
+      
+      const recipe = await analyzeRecipeImage(base64Image);
+      res.json(recipe);
+    } catch (error) {
+      console.error("Error analyzing recipe image:", error);
+      res.status(500).json({ error: "Failed to analyze image" });
+    }
   });
 
   const httpServer = createServer(app);
