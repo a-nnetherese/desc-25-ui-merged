@@ -68,7 +68,7 @@ export class MemStorage implements IStorage {
         difficulty: 2,
         prepTime: 15,
         servings: 2,
-        imageUrl: "https://scontent.fcrk3-1.fna.fbcdn.net/v/t39.30808-6/477449905_1060733536099101_5259720973362463121_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=H8KX1Aug22oQ7kNvwEGWZHc&_nc_oc=Adlo0ueXikllLrkpKd4tbO8TZMPG608YBLCjsoNaXgimesplEnaCWKyvgNgWOW7fYvJR9wYFu0zxs3O5RM8y3az1&_nc_zt=23&_nc_ht=scontent.fcrk3-1.fna&_nc_gid=i_Uvdz2lCDW7YW1plTUv5g&oh=00_Afh6fz_DM677IZyyVUuLmI2Ry5qN3cJSrnlEwhWFyT34hQ&oe=69153B45",
+        imageUrl: "https://panlasangpinoy.com/wp-content/uploads/2017/07/hotsilog-recipe.jpg",
         ingredients: ["2 cups cooked rice", "2 eggs", "2 hotdogs", "2 tbsp soy sauce", "1 tbsp vegetable oil", "1/2 cup mixed vegetables", "2 cloves garlic, minced", "Salt", "Pepper"],
         instructions: ["Heat oil in a pan over medium heat", "Add minced garlic and sauté until golden", "Slice hotdogs and add to pan, cook until slightly browned", "Add mixed vegetables and stir-fry for 2 minutes", "Add cooked rice and soy sauce, mix well and break up clumps", "Push rice to the side and crack eggs into the pan", "Fry eggs sunnyside-up until whites are set", "Season with salt and pepper, serve hot"],
       },
