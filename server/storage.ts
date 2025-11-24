@@ -170,7 +170,7 @@ export class MemStorage implements IStorage {
         prepTime: 30,
         servings: 4,
         imageUrl: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/1/03/fn_new_filipino_chicken_adobo_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1672867315356.webp",
-        ingredients: ["150g chicken (any cut)", "1 tbsp soy sauce", "1 tbsp vinegar", "2 cloves garlic, minced", "¼ cup water", "Salt", "Pepper", "Oil"],
+        ingredients: ["150g chicken (any cut)", "1 Soy sauce", "1 Vinegar", "2 cloves garlic, minced", "¼ cup water", "Salt", "Pepper", "Oil"],
         instructions: ["Sauté garlic in oil until golden.", "Add chicken, soy sauce, vinegar, water, and pepper.", "Simmer covered for 15–20 mins until chicken is cooked and sauce thickens.", "Serve with rice."],
       },
       {
